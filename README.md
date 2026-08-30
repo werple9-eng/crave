@@ -23,12 +23,40 @@ Then open http://localhost:5176.
 | `npm run typecheck` | TypeScript, no emit |
 | `npm run build` | typecheck + production build into `dist/` |
 
-### Using it on your phone
+## Live
 
-`npm run dev` prints a **Network** URL (something like `http://192.168.x.x:5176`).
-Open that on your phone while on the same wifi, then use Share → *Add to Home
-Screen*. It runs full-screen with no browser chrome and works exactly like an
-installed app. Your preferences live in that browser's storage.
+**https://werple9-eng.github.io/crave/**
+
+Open it on any phone, no wifi sharing needed. Then Share → *Add to Home Screen*
+and it runs full-screen with no browser chrome, like an installed app.
+
+### Deploying
+
+Every push to `main` rebuilds and redeploys via
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The workflow
+runs typecheck, build and tests first, so a broken commit fails the deploy
+instead of shipping.
+
+```bash
+git add -A && git commit -m "your change" && git push
+```
+
+Two things make it portable to any static host (Netlify, Vercel, Cloudflare
+Pages, an S3 bucket) with no changes:
+
+- `base: './'` in `vite.config.ts` — GitHub Pages serves from a subpath
+  (`/crave/`), so absolute `/assets/...` URLs would 404. Relative paths work
+  on a subpath, at a domain root, and from a local `dist/` folder.
+- No backend. Everything is static files plus `localStorage`.
+
+To host it somewhere else, run `npm run build` and upload `dist/`.
+
+### Using it on your own machine
+
+`npm run dev` prints a **Network** URL (something like `http://192.168.x.x:5176`)
+if you want to test on a phone on the same wifi without deploying. Your
+preferences live in that browser's storage, so the local and hosted versions
+keep separate history.
 
 ## How it works
 
