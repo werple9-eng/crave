@@ -27,7 +27,15 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      # `npm install`, not `npm ci`, on purpose.
+      #
+      # npm writes some of esbuild's per-platform optional packages into the
+      # lockfile *without* their `optional: true` flag (only the copy for the
+      # platform that generated the lock gets flagged). `npm ci` then treats
+      # e.g. @esbuild/netbsd-arm64 as required and dies with EBADPLATFORM on
+      # the Linux runner. `npm install` re-resolves optional deps per platform
+      # and installs the right binaries.
+      - run: npm install --no-audit --no-fund
 
       # `npm run build` is typecheck + vite build, so a type error fails the
       # deploy instead of shipping a broken page.
