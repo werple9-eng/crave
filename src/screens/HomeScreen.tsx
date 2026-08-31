@@ -3,14 +3,17 @@ import { FOODS } from '../data/foods'
 import { DIETARY_OPTIONS } from '../data/questions'
 import { FoodArt } from '../components/FoodArt'
 import { Screen } from '../components/ui'
-import { IconDice, IconFlame, IconUser, IconUtensils } from '../components/icons'
+import { IconDice, IconFlame, IconMoon, IconSun, IconUser, IconUtensils } from '../components/icons'
 import { currentDaypart, DAYPART_GREETING, DAYPART_NOTE } from '../engine/daypart'
 import type { History } from '../storage/history'
+import type { Theme } from '../storage/theme'
 
 export function HomeScreen({
-  history, onStart, onSurprise, onProfile,
+  history, theme, onStart, onSurprise, onProfile, onToggleTheme,
 }: {
   history: History
+  theme: Theme
+  onToggleTheme: () => void
   onStart: () => void
   onSurprise: () => void
   onProfile: () => void
@@ -28,9 +31,18 @@ export function HomeScreen({
     <Screen
       center
       right={
-        <button className="iconbtn" onClick={onProfile} aria-label="Your food profile">
-          <IconUser />
-        </button>
+        <>
+          <button
+            className="iconbtn"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <IconSun /> : <IconMoon />}
+          </button>
+          <button className="iconbtn" onClick={onProfile} aria-label="Your food profile">
+            <IconUser />
+          </button>
+        </>
       }
       footer={
         <>

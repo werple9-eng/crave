@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type {
   Food, HungerLevel, PreferenceAnswers, Reaction, ReactionValue,
   ScoredFood, SessionInput, VetoId,
@@ -14,6 +14,8 @@ import {
   saveHistory, setDietary,
 } from './storage/history'
 import type { History } from './storage/history'
+import { applyTheme, loadTheme, saveTheme } from './storage/theme'
+import type { Theme } from './storage/theme'
 import { Ambient } from './components/ui'
 import { HomeScreen } from './screens/HomeScreen'
 import { QuestionsScreen } from './screens/QuestionsScreen'
@@ -27,6 +29,15 @@ type Step = 'home' | 'questions' | 'swipe' | 'results' | 'profile'
 export default function App() {
   const [step, setStep] = useState<Step>('home')
   const [history, setHistory] = useState<History>(() => loadHistory())
+  const [theme, setTheme] = useState<Theme>(() => loadTheme())
+
+  useEffect(() => { applyTheme(theme) }, [theme])
+
+  const toggleTheme = () => {
+    const next: Theme = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    saveTheme(next)
+  }
 
   // Current session
   const [hunger, setHunger] = useState<HungerLevel | null>(null)
@@ -186,6 +197,8 @@ export default function App() {
         return (
           <HomeScreen
             history={history}
+            theme={theme}
+            onToggleTheme={toggleTheme}
             onStart={start}
             onSurprise={surprise}
             onProfile={() => setStep('profile')}

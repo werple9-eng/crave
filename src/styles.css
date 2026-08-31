@@ -19,19 +19,20 @@
  * ------------------------------------------------------------------ */
 
 :root {
-  /* Pastel, but saturated enough to still read as colour rather than
-   * grey. Every one of these carries dark ink text and a dark outline,
-   * which is what keeps a pastel palette from going washed-out and weak. */
-  --c-tomato: #ff9d8b;
-  --c-paprika: #f4806c;
-  --c-tangerine: #ffb992;
-  --c-mango: #ffd39a;
-  --c-butter: #ffeaa8;
-  --c-lime: #cfe8a0;
-  --c-basil: #8fcf9f;
-  --c-mint: #a5e5d5;
-  --c-berry: #ffb4cf;
-  --c-grape: #cdb8f2;
+  /* Sorbet: pastel, but with enough saturation left in it to read as
+   * colour rather than as washed-out grey. Every one of these carries dark
+   * text and a dark outline, which is what keeps a pastel set from going
+   * weak. Warm hues still own the primary actions. */
+  --c-tomato: #f2685c;
+  --c-paprika: #dd5346;
+  --c-tangerine: #fa9256;
+  --c-mango: #fbbc55;
+  --c-butter: #f9de7d;
+  --c-lime: #a9d268;
+  --c-basil: #57bd8a;
+  --c-mint: #5fc9c9;
+  --c-berry: #ef7fa6;
+  --c-grape: #a98bea;
 
   /* ground */
   --bg: #fffaf4;
@@ -39,8 +40,14 @@
   --surface: #ffffff;
   --surface-warm: #fff6ec;
 
-  /* ink — a very dark warm brown, never black */
+  /* Ink does double duty as text *and* as the chunky outline, so it flips
+   * with the theme. The hard shadow needs its own token: in dark mode the
+   * outline goes light while the shadow has to stay darker than the card. */
   --ink: #191207;
+  --shadow-ink: #191207;
+  /* Text sitting ON a pastel fill. Stays dark in BOTH themes - a cream
+   * label on a pastel chip is unreadable. */
+  --on-accent: #1b1510;
   --ink-soft: #5c4433;
   --muted: #8c7565;
   --text: var(--ink);
@@ -54,7 +61,11 @@
   --chilli: var(--c-tomato);
   --honey: var(--c-mango);
 
-  --grad-hot: linear-gradient(135deg, #ffd79f 0%, #ffb190 45%, #ff9d8b 100%);
+  --grad-hot: linear-gradient(135deg, #fbbc55 0%, #fa9256 45%, #f2685c 100%);
+
+  /* Backdrop behind every food illustration. */
+  --art-a: var(--c-mango);
+  --art-b: var(--c-butter);
 
   --r-xl: 28px;
   --r-lg: 22px;
@@ -62,9 +73,9 @@
   --r-sm: 12px;
 
   /* hard offset shadows: the single most maximalist thing in the sheet */
-  --pop-sm: 3px 3px 0 var(--ink);
-  --pop: 5px 5px 0 var(--ink);
-  --pop-lg: 8px 8px 0 var(--ink);
+  --pop-sm: 3px 3px 0 var(--shadow-ink);
+  --pop: 5px 5px 0 var(--shadow-ink);
+  --pop-lg: 8px 8px 0 var(--shadow-ink);
 
   --spring: cubic-bezier(0.34, 1.42, 0.5, 1);
   --out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -147,6 +158,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .topbar .spacer { flex: 1; }
 
 .steplabel {
+  color: var(--on-accent);
   font-size: 12.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -201,12 +213,12 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   will-change: transform;
 }
 /* press = travel into your own shadow */
-.btn:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--ink); }
+.btn:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
 .btn:disabled { opacity: 0.45; cursor: default; transform: none; }
 
 /* Ink on pastel, not white: white text on a pastel fill fails contrast. */
-.btn-primary { background: var(--grad-hot); color: var(--ink); }
-.btn-ghost { background: var(--c-butter); color: var(--ink); }
+.btn-primary { background: var(--grad-hot); color: var(--on-accent); }
+.btn-ghost { background: var(--c-butter); color: var(--on-accent); }
 .btn-ghost:hover { background: var(--c-mango); }
 
 .btn-text {
@@ -245,7 +257,7 @@ a.btn { text-decoration: none; }
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring), background 0.16s ease;
 }
 .iconbtn:hover { background: var(--c-butter); }
-.iconbtn:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--ink); }
+.iconbtn:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--shadow-ink); }
 .iconbtn:disabled { opacity: 0.4; cursor: default; transform: none; }
 
 /* ------------------------- option cards -------------------------- */
@@ -280,9 +292,9 @@ a.btn { text-decoration: none; }
 .option:nth-child(5) { --oc: var(--c-berry); }
 
 @keyframes optionIn { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
-.option:hover { transform: translate3d(-2px, -2px, 0); box-shadow: 7px 7px 0 var(--ink); }
-.option:active { transform: translate3d(3px, 3px, 0); box-shadow: 1px 1px 0 var(--ink); }
-.option.selected { background: var(--oc); }
+.option:hover { transform: translate3d(-2px, -2px, 0); box-shadow: 7px 7px 0 var(--shadow-ink); }
+.option:active { transform: translate3d(3px, 3px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
+.option.selected { background: var(--oc); color: var(--on-accent); }
 
 .option .oicon {
   width: 52px;
@@ -295,14 +307,14 @@ a.btn { text-decoration: none; }
   place-items: center;
   font-size: 27px;
   line-height: 1;
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow-ink);
   transition: transform 0.28s var(--spring);
 }
 .option:hover .oicon { transform: rotate(-9deg) scale(1.08); }
 .option.selected .oicon { background: var(--surface); transform: rotate(6deg) scale(1.1); }
 .option .olabel { display: block; font-size: 17.5px; font-weight: 850; letter-spacing: -0.015em; }
 .option .ohint { display: block; font-size: 13.5px; color: var(--ink-soft); font-weight: 650; margin-top: 1px; }
-.option.selected .ohint { color: rgba(43, 20, 8, 0.72); }
+.option.selected .ohint { color: rgba(27, 21, 16, 0.72); }
 .option .otick {
   margin-left: auto;
   flex-shrink: 0;
@@ -336,9 +348,11 @@ a.btn { text-decoration: none; }
 .pips i.now { background: var(--c-tomato); transform: scaleY(1.35); }
 
 .progress {
-  height: 14px;
+  /* Thin border, taller bar: at 3px the outline swallowed a 14px bar and an
+   * empty progress bar read as a full one. */
+  height: 16px;
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 2.5px solid var(--ink);
   border-radius: 999px;
   overflow: hidden;
   margin: 4px 0 16px;
@@ -393,8 +407,8 @@ a.btn { text-decoration: none; }
     radial-gradient(120% 84% at 50% 4%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 62%),
     repeating-linear-gradient(
       -45deg,
-      var(--c-mango) 0 22px,
-      var(--c-butter) 22px 44px
+      var(--art-a) 0 22px,
+      var(--art-b) 22px 44px
     );
 }
 .food-art svg { width: 100%; height: 100%; max-height: 330px; }
@@ -425,13 +439,14 @@ a.btn { text-decoration: none; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
 .tag {
+  color: var(--on-accent);
   font-size: 12px;
   font-weight: 900;
   padding: 5px 11px;
   border-radius: 999px;
   border: 2.5px solid var(--ink);
   color: var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow-ink);
 }
 .tag:nth-child(1) { background: var(--c-tangerine); }
 .tag:nth-child(2) { background: var(--c-butter); }
@@ -452,8 +467,8 @@ a.btn { text-decoration: none; }
   z-index: 2;
   will-change: opacity;
 }
-.stamp.yes { left: 20px; background: var(--c-lime); color: var(--ink); transform: rotate(-13deg); }
-.stamp.no { right: 20px; background: var(--c-tomato); color: var(--ink); transform: rotate(13deg); }
+.stamp.yes { left: 20px; background: var(--c-lime); color: var(--on-accent); transform: rotate(-13deg); }
+.stamp.no { right: 20px; background: var(--c-tomato); color: var(--on-accent); transform: rotate(13deg); }
 
 .controls { display: flex; gap: 11px; }
 .ctrl {
@@ -472,13 +487,14 @@ a.btn { text-decoration: none; }
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring), background 0.16s ease;
   will-change: transform;
 }
-.ctrl:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--ink); }
-.ctrl.no { background: #ffe6e0; }
+.ctrl:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
+.ctrl.no { background: #ffe6e0; color: var(--on-accent); }
 .ctrl.no:hover { background: var(--c-tomato); }
-.ctrl.yes { background: #eaf6d8; }
+.ctrl.yes { background: #eaf6d8; color: var(--on-accent); }
 .ctrl.yes:hover { background: var(--c-lime); }
 
 .ctrl.wide {
+  color: var(--on-accent);
   width: 100%;
   height: 54px;
   grid-auto-flow: column;
@@ -510,8 +526,8 @@ a.btn { text-decoration: none; }
   will-change: transform;
 }
 @keyframes resultIn { from { opacity: 0; transform: translate3d(0, 26px, 0) scale(0.95); } }
-.result:hover { transform: translate3d(-2px, -2px, 0); box-shadow: 7px 7px 0 var(--ink); }
-.result:active { transform: translate3d(3px, 3px, 0); box-shadow: 1px 1px 0 var(--ink); }
+.result:hover { transform: translate3d(-2px, -2px, 0); box-shadow: 7px 7px 0 var(--shadow-ink); }
+.result:active { transform: translate3d(3px, 3px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
 
 .result.top {
   background: linear-gradient(150deg, #fff6d9 0%, var(--surface) 60%);
@@ -525,10 +541,10 @@ a.btn { text-decoration: none; }
   flex-shrink: 0;
   border-radius: var(--r-sm);
   border: 3px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--c-mango) 0 12px, var(--c-butter) 12px 24px);
+  background: repeating-linear-gradient(-45deg, var(--art-a) 0 12px, var(--art-b) 12px 24px);
   display: grid;
   place-items: center;
-  box-shadow: 2.5px 2.5px 0 var(--ink);
+  box-shadow: 2.5px 2.5px 0 var(--shadow-ink);
 }
 .result.top .thumb { width: 90px; height: 90px; }
 .result .thumb svg { width: 100%; height: 100%; }
@@ -548,6 +564,7 @@ a.btn { text-decoration: none; }
   transform-origin: left center;
 }
 .matchnum {
+  color: var(--on-accent);
   font-size: 12.5px; font-weight: 900; color: var(--ink);
   font-variant-numeric: tabular-nums;
   background: var(--c-butter); border: 2.5px solid var(--ink);
@@ -575,9 +592,9 @@ a.btn { text-decoration: none; }
   border-radius: 999px;
   display: grid;
   place-items: center;
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow-ink);
 }
-.result.top .rank { background: var(--c-tomato); color: var(--ink); }
+.result.top .rank { background: var(--c-tomato); color: var(--on-accent); }
 
 /* ---------------------------- modal ------------------------------ */
 
@@ -609,7 +626,7 @@ a.btn { text-decoration: none; }
 .modal .mart {
   width: 168px; height: 168px; margin: 4px auto 0;
   border-radius: 22px; border: 3px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--c-mango) 0 18px, var(--c-butter) 18px 36px);
+  background: repeating-linear-gradient(-45deg, var(--art-a) 0 18px, var(--art-b) 18px 36px);
   box-shadow: var(--pop-sm);
 }
 .modal .mlabel {
@@ -654,10 +671,11 @@ a.btn { text-decoration: none; }
 .stat:nth-child(1) { background: var(--c-butter); }
 .stat:nth-child(2) { background: var(--c-mint); }
 .stat .snum {
+  color: var(--on-accent);
   font-size: 34px; font-weight: 900; letter-spacing: -0.04em;
   color: var(--ink); font-variant-numeric: tabular-nums;
 }
-.stat .slabel { font-size: 13px; color: var(--ink); font-weight: 700; margin-top: 2px; line-height: 1.25; }
+.stat .slabel { font-size: 13px; color: var(--on-accent); font-weight: 700; margin-top: 2px; line-height: 1.25; }
 
 .rows { display: grid; gap: 10px; margin-bottom: 22px; }
 .row {
@@ -688,12 +706,13 @@ a.btn { text-decoration: none; }
 .row .remoji {
   width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px;
   border: 2.5px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--c-mango) 0 10px, var(--c-butter) 10px 20px);
+  background: repeating-linear-gradient(-45deg, var(--art-a) 0 10px, var(--art-b) 10px 20px);
   display: grid; place-items: center;
 }
 .row .remoji svg { width: 100%; height: 100%; }
 
 .sectiontitle {
+  color: var(--on-accent);
   display: inline-block;
   font-size: 12px;
   letter-spacing: 0.1em;
@@ -734,8 +753,8 @@ a.btn { text-decoration: none; }
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring), background 0.16s ease;
   will-change: transform;
 }
-.chip:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--ink); }
-.chip.on { background: var(--c-tomato); color: var(--ink); }
+.chip:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--shadow-ink); }
+.chip.on { background: var(--c-tomato); color: var(--on-accent); }
 
 /* ----------------------------- home ------------------------------ */
 
@@ -744,7 +763,7 @@ a.btn { text-decoration: none; }
   width: 156px; height: 156px; margin: 0 auto 4px;
   border-radius: 30px;
   border: 3.5px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--c-mango) 0 20px, var(--c-butter) 20px 40px);
+  background: repeating-linear-gradient(-45deg, var(--art-a) 0 20px, var(--art-b) 20px 40px);
   box-shadow: var(--pop);
   animation: float 5.5s ease-in-out infinite;
   will-change: transform;
@@ -773,6 +792,7 @@ a.btn { text-decoration: none; }
 }
 
 .dietline {
+  color: var(--on-accent);
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--c-mint); border: 3px solid var(--ink);
   border-radius: 999px; padding: 9px 16px; font-size: 13.5px;
@@ -780,12 +800,12 @@ a.btn { text-decoration: none; }
   box-shadow: var(--pop-sm);
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring);
 }
-.dietline:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--ink); }
+.dietline:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--shadow-ink); }
 
 .streak {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 13.5px; font-weight: 900;
-  background: var(--c-berry); color: var(--ink);
+  background: var(--c-berry); color: var(--on-accent);
   border: 3px solid var(--ink);
   border-radius: 999px; padding: 6px 14px;
   box-shadow: var(--pop-sm);
@@ -854,3 +874,78 @@ a.btn { text-decoration: none; }
   .option .oicon { width: 44px; height: 44px; font-size: 23px; }
   .btn { padding: 13px 18px; }
 }
+
+/* ------------------------------------------------------------------ *
+ * Dark mode
+ *
+ * Grey, not black. Pure black would kill the whole point of the chunky
+ * outlines (nothing to outline against) and reads as harsh next to warm
+ * food colours — a warm charcoal keeps the food looking edible.
+ *
+ * Three things flip, and they flip independently:
+ *   --ink         text and the chunky outline  → cream
+ *   --shadow-ink  the hard offset shadow       → stays dark, and must be
+ *                 darker than the card or the shadow disappears
+ *   --on-accent   text sitting on a pastel     → unchanged, still dark
+ *
+ * The pastels themselves are deliberately NOT dimmed: bright sorbet fills
+ * against warm grey is the whole look, and they still carry dark text.
+ * ------------------------------------------------------------------ */
+
+[data-theme='dark'] {
+  --bg: #302e35;
+  --bg-deep: #3b3841;
+  --surface: #3b3942;
+  --surface-warm: #46434e;
+
+  --ink: #f4efe6;
+  --shadow-ink: #17161b;
+  --ink-soft: #cec5b8;
+  --muted: #a89e92;
+  --text: var(--ink);
+  --text-soft: var(--ink-soft);
+  --line: var(--ink);
+  --line-strong: var(--ink);
+
+  --flame-deep: #ffa694;
+
+  /* calmer backdrop behind the food, so the illustration is the bright thing */
+  --art-a: #4c4753;
+  --art-b: #575161;
+
+  color-scheme: dark;
+}
+
+/* The ground keeps its colours but drops right back - at full strength the
+ * washes glow against a dark page. */
+[data-theme='dark'] .ambient {
+  background:
+    radial-gradient(44% 30% at 2% 0%, rgba(242, 104, 92, 0.26), rgba(242, 104, 92, 0) 70%),
+    radial-gradient(38% 28% at 98% 4%, rgba(250, 146, 86, 0.24), rgba(250, 146, 86, 0) 68%),
+    radial-gradient(32% 24% at 84% 32%, rgba(239, 127, 166, 0.20), rgba(239, 127, 166, 0) 70%),
+    radial-gradient(38% 28% at 8% 44%, rgba(251, 188, 85, 0.22), rgba(251, 188, 85, 0) 70%),
+    radial-gradient(32% 22% at 94% 72%, rgba(169, 210, 104, 0.18), rgba(169, 210, 104, 0) 70%),
+    radial-gradient(46% 32% at 24% 100%, rgba(249, 222, 125, 0.22), rgba(249, 222, 125, 0) 72%),
+    radial-gradient(30% 20% at 62% 60%, rgba(95, 201, 201, 0.16), rgba(95, 201, 201, 0) 72%);
+}
+[data-theme='dark'] .ambient::after {
+  background-image: radial-gradient(rgba(255, 248, 236, 0.10) 1.6px, transparent 1.7px);
+}
+
+/* A white wash over a dark art panel just looks like a smudge. */
+[data-theme='dark'] .food-art {
+  background:
+    radial-gradient(120% 84% at 50% 4%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 62%),
+    repeating-linear-gradient(-45deg, var(--art-a) 0 22px, var(--art-b) 22px 44px);
+}
+
+[data-theme='dark'] .result.top {
+  background: linear-gradient(150deg, #4c4634 0%, var(--surface) 60%);
+}
+
+/* Hardcoded pale control fills still carry dark text, so they stay bright
+ * on purpose - they're the pop against the grey. */
+[data-theme='dark'] .ctrl.no { background: #f6cdc6; }
+[data-theme='dark'] .ctrl.yes { background: #d9ecc0; }
+
+[data-theme='dark'] .backdrop { background: rgba(12, 11, 14, 0.68); }
