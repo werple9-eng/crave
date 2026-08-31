@@ -146,45 +146,51 @@ instantly readable and carry their own colour, which is exactly what a
 maximalist picker wants; the chrome (back, undo, heart, trash) stays on the
 drawn 24px icon set so it holds up small and inherits `currentColor`.
 
-**Pictures.** 283 of the 312 dishes use a real photograph from Wikimedia
-Commons; the other 29 keep a drawn illustration, and `FoodArt` falls back to
-the drawing if an image fails to load, so a card is never empty.
+**Pictures.** Three tiers, best first: 87 dishes have a vendored CC0 studio
+photograph in `src/assets/food/`, 192 keep a Wikimedia Commons photo, and the
+remaining 33 are drawn. `FoodArt` also falls back to the drawing when an image
+fails to load, so a card is never empty.
 
-This replaced a drawn-only system for a structural reason an audit made
-obvious: 24 silhouettes had to cover 312 dishes, so 68 of them shared the
-`plate` picture and 62 shared `bowl`. Half the library was one of three
-images. That is not fixable by reassigning forms — only 10 assignments were
-even arguable, and on review all 10 were already correct.
+The Commons-only version had a problem no filter could fix. These all matched
+the dish name on every significant word and were still wrong:
 
-Two lessons if you ever regenerate them:
+| Dish | What the photo actually showed |
+| --- | --- |
+| Khao Soi | Vogel's pit viper, at the Khao Soi Dao Wildlife Sanctuary |
+| Apple Pie | an album cover - a portrait of the musician Kelly Lee Owens |
+| Kofta Kebab | a lamb in a field, from the geograph.org.uk survey |
+| Korean BBQ | a restaurant building and its car park |
+| Smashburger | a storefront |
+| Hot Chocolate | people at a party |
+| Cold Brew | the Oji brewing apparatus |
+| Beignets | a beignet-making machine |
 
-- **Guard the search.** A naive top result returns the Smashburger *company
-  logo* for "Smashburger". The fetcher rejects logos, signage, packaging,
-  museums, festivals and shop fronts, and requires the file name to share a
-  word with the dish name.
-- **Word overlap is not enough.** "Bubble tea six languages" shares both
-  words and is a photograph of a menu board. Titles are re-scanned afterwards
-  for anything suggesting the subject is not food on a plate, and a dish with
-  no clean alternative is dropped rather than kept — the illustration beats a
-  picture of a display cabinet.
+Word overlap proves the subject is *named*, not that it is food. Neither does
+the metadata: Openverse reports `category: photograph` for a William Blake
+engraving. The only check that worked was rendering every image to a contact
+sheet and looking at it, which is what `_sheet.html` in the scratch scripts is
+for. 19 Commons photos and 15 stock picks were removed that way.
 
-Also worth knowing: the first fetch reported 190 dishes with "no photo", but
-almost all of those were HTTP 429s being swallowed as misses. Retrying with
-backoff recovered 163 of them. Rate limiting and absence look identical if
-you do not check.
+So the source matters more than the filter. StockSnap and Rawpixel are CC0 and
+their food photography is studio-lit, which is why they are tier one - though
+Rawpixel also hosts digitized museum artwork, so its results still need eyes.
+Coverage is the trade: CC0 stock has plenty of pizza and pancakes and nothing
+at all for Tteokbokki or Bouillabaisse, which is why Commons still carries the
+long tail.
 
-Photos are hotlinked rather than copied into the repo: vendoring all 283
-would add roughly 48MB to git, and the CDN rate-limits a bulk download (it
-429'd after 15). Attribution lives in `photoCredits.ts`, dynamically imported
-so 38KB of licence text stays out of the initial bundle.
+Stock photos are vendored rather than hotlinked. Each CDN serves exactly one
+rendition - 40KB to 460KB, no smaller variant, and StockSnap 404s every width
+but 960w - while a card only ever shows about 400px. Resizing locally with
+`sharp` turns a 22MB dependency on someone else's bandwidth into 2.4MB we own.
+They go in `src/assets/` so Vite hashes them and rewrites the `/crave/` base
+path. Commons photos are still hotlinked, and attribution for them lives in
+`photoCredits.ts`, imported on demand so it stays out of the initial bundle.
 
-The illustration system is still there behind the photos — vessel + fill +
-toppings, composed from each dish's own data. See `foodParts.tsx`.
-
-Run the dev server and open **`#gallery`** to see every form on one contact
-sheet. Drawing twenty-three silhouettes without that means fixing one and
-breaking two others without noticing.
-
+Two things worth knowing if you regenerate them. Openverse allows 200
+anonymous requests a day, so `stock.js` paces itself and saves state as it
+goes. And filtering by `category=photograph` returns *zero* results for
+gnocchi - most records simply have no category - so it filters on the title
+instead.
 **Vessels have a specific draw order**, and getting it wrong is what made the
 first version look broken — food was drawn as a dome *on top of* the bowl with
 the rim ellipse slicing through it:

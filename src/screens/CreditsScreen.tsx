@@ -29,9 +29,10 @@ export function CreditsScreen({ onBack }: { onBack: () => void }) {
     <Screen onBack={onBack} step="Credits">
       <h2 className="title">Photo credits</h2>
       <p className="subtitle">
-        {total} dish photographs come from Wikimedia Commons. Those listed below are
-        under licences that require naming the photographer; the rest are public
-        domain or CC0. Everything else in the app is drawn.
+        {total} dishes have a photograph. Most are CC0 studio shots from StockSnap
+        and Rawpixel, which need no attribution; the rest come from Wikimedia
+        Commons, and those listed below are under licences that require naming the
+        photographer. Everything else in the app is drawn.
       </p>
 
       {credits === null ? (
