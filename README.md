@@ -30,6 +30,24 @@ Then open http://localhost:5176.
 Open it on any phone, no wifi sharing needed. Then Share → *Add to Home Screen*
 and it runs full-screen with no browser chrome, like an installed app.
 
+### How it looks when you send the link
+
+`index.html` carries a real `<title>`, description, Open Graph and Twitter card
+tags, plus a drawn 1200×630 share image, so pasting the link into iMessage,
+WhatsApp, Discord or Slack renders a proper card instead of a bare URL.
+
+**`og:image` and `og:url` must be absolute URLs.** Most link scrapers won't
+resolve a relative one and you'll get a blank grey card. Those two are the only
+host-specific values in the app — update them if it ever moves.
+
+Icons live in `public/`: an SVG favicon for browser tabs, PNG fallbacks, an
+`apple-touch-icon.png` for iOS, and a web manifest so Add to Home Screen picks
+up the right name, icon and theme colour rather than a screenshot.
+
+Regenerating them: they were drawn on a `<canvas>` and POSTed straight to disk
+by a throwaway local server, which avoids needing an image toolchain. There's
+no build step for them — they're committed as static files.
+
 ### Deploying
 
 Every push to `main` rebuilds and redeploys via
@@ -95,11 +113,14 @@ A test asserts the two sets can never overlap again.
 
 ### The look
 
-**Maximalist.** A saturated multi-colour ground under a dot screen, chunky ink
-outlines on everything, hard offset shadows, and a different colour for every
-option in a list. Buttons travel *into* their own shadow when pressed.
+**Maximalist, delivery-app red.** A saturated multi-colour ground under a dot
+screen, chunky ink outlines on everything, hard offset shadows, and a different
+colour for every option in a list. Buttons travel *into* their own shadow when
+pressed. The palette is anchored on a hot red (#eb1700) over clean white cards,
+taking its cue from food-delivery apps — inspired by that look, not copying it:
+no borrowed logo, wordmark or brand asset appears anywhere.
 
-**Still built around appetite.** Warm hues — tomato, tangerine, mango, butter —
+**Still built around appetite.** Warm hues — red, tangerine, mango, butter —
 carry roughly two thirds of the surface area and always own the primary
 actions. Lime, mint, berry and grape are pops, not the base. Cool blues and
 greys stay out of it: they read clinical and are famously appetite-suppressing.
