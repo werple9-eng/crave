@@ -19,23 +19,25 @@
  * ------------------------------------------------------------------ */
 
 :root {
-  /* the loud part — anchored on a delivery-app red */
-  --c-tomato: #eb1700;
-  --c-paprika: #c81200;
-  --c-tangerine: #ff5a1f;
-  --c-mango: #ff9b21;
-  --c-butter: #ffc933;
-  --c-lime: #9ed629;
-  --c-basil: #23a55a;
-  --c-mint: #12c2a0;
-  --c-berry: #ec2f6e;
-  --c-grape: #9147d6;
+  /* Pastel, but saturated enough to still read as colour rather than
+   * grey. Every one of these carries dark ink text and a dark outline,
+   * which is what keeps a pastel palette from going washed-out and weak. */
+  --c-tomato: #ff9d8b;
+  --c-paprika: #f4806c;
+  --c-tangerine: #ffb992;
+  --c-mango: #ffd39a;
+  --c-butter: #ffeaa8;
+  --c-lime: #cfe8a0;
+  --c-basil: #8fcf9f;
+  --c-mint: #a5e5d5;
+  --c-berry: #ffb4cf;
+  --c-grape: #cdb8f2;
 
   /* ground */
-  --bg: #fff6ee;
-  --bg-deep: #ffe0c8;
+  --bg: #fffaf4;
+  --bg-deep: #ffeadb;
   --surface: #ffffff;
-  --surface-warm: #fff1e4;
+  --surface-warm: #fff6ec;
 
   /* ink — a very dark warm brown, never black */
   --ink: #191207;
@@ -47,12 +49,12 @@
   --line-strong: var(--ink);
 
   --flame: var(--c-paprika);
-  --flame-deep: #bb2612;
+  --flame-deep: #c2543f;
   --basil: var(--c-basil);
   --chilli: var(--c-tomato);
   --honey: var(--c-mango);
 
-  --grad-hot: linear-gradient(135deg, #ff8a1f 0%, #ff4d0d 44%, #eb1700 100%);
+  --grad-hot: linear-gradient(135deg, #ffd79f 0%, #ffb190 45%, #ff9d8b 100%);
 
   --r-xl: 28px;
   --r-lg: 22px;
@@ -98,13 +100,13 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(42% 28% at 2% 0%, rgba(235, 23, 0, 0.62), rgba(235, 23, 0, 0) 68%),
-    radial-gradient(36% 26% at 98% 4%, rgba(255, 90, 31, 0.60), rgba(255, 90, 31, 0) 66%),
-    radial-gradient(30% 22% at 84% 32%, rgba(235, 23, 0, 0.34), rgba(235, 23, 0, 0) 68%),
-    radial-gradient(36% 26% at 8% 44%, rgba(255, 155, 33, 0.52), rgba(255, 155, 33, 0) 68%),
-    radial-gradient(30% 20% at 94% 72%, rgba(158, 214, 41, 0.32), rgba(158, 214, 41, 0) 68%),
-    radial-gradient(44% 30% at 24% 100%, rgba(255, 201, 51, 0.60), rgba(255, 201, 51, 0) 70%),
-    radial-gradient(28% 18% at 62% 60%, rgba(18, 194, 160, 0.20), rgba(18, 194, 160, 0) 70%);
+    radial-gradient(44% 30% at 2% 0%, rgba(255, 157, 139, 0.72), rgba(255, 157, 139, 0) 70%),
+    radial-gradient(38% 28% at 98% 4%, rgba(255, 185, 146, 0.70), rgba(255, 185, 146, 0) 68%),
+    radial-gradient(32% 24% at 84% 32%, rgba(255, 180, 207, 0.55), rgba(255, 180, 207, 0) 70%),
+    radial-gradient(38% 28% at 8% 44%, rgba(255, 211, 154, 0.68), rgba(255, 211, 154, 0) 70%),
+    radial-gradient(32% 22% at 94% 72%, rgba(207, 232, 160, 0.58), rgba(207, 232, 160, 0) 70%),
+    radial-gradient(46% 32% at 24% 100%, rgba(255, 234, 168, 0.72), rgba(255, 234, 168, 0) 72%),
+    radial-gradient(30% 20% at 62% 60%, rgba(165, 229, 213, 0.46), rgba(165, 229, 213, 0) 72%);
 }
 
 /* Dot screen over the gradients, so the ground has texture up close. */
@@ -112,7 +114,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(25, 18, 7, 0.13) 1.6px, transparent 1.7px);
+  background-image: radial-gradient(rgba(25, 18, 7, 0.10) 1.6px, transparent 1.7px);
   background-size: 16px 16px;
   opacity: 0.55;
 }
@@ -167,7 +169,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   font-weight: 900;
   letter-spacing: -0.04em;
   margin: 14px 0 8px;
-  text-shadow: 2.5px 2.5px 0 rgba(255, 201, 51, 0.95);
+  text-shadow: 2.5px 2.5px 0 var(--c-butter);
 }
 .subtitle {
   color: var(--ink-soft);
@@ -202,7 +204,8 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .btn:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--ink); }
 .btn:disabled { opacity: 0.45; cursor: default; transform: none; }
 
-.btn-primary { background: var(--grad-hot); color: #fff; text-shadow: 0 1.5px 0 rgba(120, 30, 8, 0.5); }
+/* Ink on pastel, not white: white text on a pastel fill fails contrast. */
+.btn-primary { background: var(--grad-hot); color: var(--ink); }
 .btn-ghost { background: var(--c-butter); color: var(--ink); }
 .btn-ghost:hover { background: var(--c-mango); }
 
@@ -450,7 +453,7 @@ a.btn { text-decoration: none; }
   will-change: opacity;
 }
 .stamp.yes { left: 20px; background: var(--c-lime); color: var(--ink); transform: rotate(-13deg); }
-.stamp.no { right: 20px; background: var(--c-tomato); color: #fff; transform: rotate(13deg); }
+.stamp.no { right: 20px; background: var(--c-tomato); color: var(--ink); transform: rotate(13deg); }
 
 .controls { display: flex; gap: 11px; }
 .ctrl {
@@ -470,9 +473,9 @@ a.btn { text-decoration: none; }
   will-change: transform;
 }
 .ctrl:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--ink); }
-.ctrl.no { background: #ffdedb; }
-.ctrl.no:hover { background: var(--c-tomato); color: #fff; }
-.ctrl.yes { background: #e6f7cf; }
+.ctrl.no { background: #ffe6e0; }
+.ctrl.no:hover { background: var(--c-tomato); }
+.ctrl.yes { background: #eaf6d8; }
 .ctrl.yes:hover { background: var(--c-lime); }
 
 .ctrl.wide {
@@ -574,7 +577,7 @@ a.btn { text-decoration: none; }
   place-items: center;
   box-shadow: 2px 2px 0 var(--ink);
 }
-.result.top .rank { background: var(--c-tomato); color: #fff; }
+.result.top .rank { background: var(--c-tomato); color: var(--ink); }
 
 /* ---------------------------- modal ------------------------------ */
 
@@ -732,7 +735,7 @@ a.btn { text-decoration: none; }
   will-change: transform;
 }
 .chip:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--ink); }
-.chip.on { background: var(--c-tomato); color: #fff; }
+.chip.on { background: var(--c-tomato); color: var(--ink); }
 
 /* ----------------------------- home ------------------------------ */
 
@@ -751,11 +754,13 @@ a.btn { text-decoration: none; }
   font-weight: 900;
   letter-spacing: -0.055em;
   margin: 14px 0 10px;
-  color: var(--c-tomato);
-  /* stacked offsets instead of a gradient: louder, and it survives at any size */
+  /* Pastel fill on a pastel ground disappears, so the wordmark inverts:
+   * ink letters with the colour thrown behind them as hard offsets. Reads
+   * instantly at any size and still says 'pastel palette'. */
+  color: var(--ink);
   text-shadow:
-    3px 3px 0 var(--c-butter),
-    6px 6px 0 var(--ink);
+    4px 4px 0 var(--c-tomato),
+    8px 8px 0 var(--c-butter);
 }
 .hero p { color: var(--ink-soft); font-size: 16px; font-weight: 650; line-height: 1.4; margin: 0 auto; max-width: 300px; }
 .hero .greeting {
@@ -780,7 +785,7 @@ a.btn { text-decoration: none; }
 .streak {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 13.5px; font-weight: 900;
-  background: var(--c-berry); color: #fff;
+  background: var(--c-berry); color: var(--ink);
   border: 3px solid var(--ink);
   border-radius: 999px; padding: 6px 14px;
   box-shadow: var(--pop-sm);
@@ -792,4 +797,60 @@ a.btn { text-decoration: none; }
     animation-iteration-count: 1 !important;
     transition-duration: 0.001s !important;
   }
+}
+
+/* ------------------------------------------------------------------ *
+ * Short screens
+ *
+ * The home screen used to overflow on anything under ~700px tall: the
+ * hero pushed "Find my food" off the bottom, so the app looked like a big
+ * picture of a bowl with nothing to tap. It did technically scroll, but a
+ * primary action below the fold may as well not exist on a phone.
+ *
+ * The hero is now capped in viewport units and steps down on short
+ * viewports, so the footer buttons are always reachable without scrolling.
+ * ------------------------------------------------------------------ */
+
+.hero .logo {
+  width: min(156px, 21vh);
+  height: min(156px, 21vh);
+}
+.hero h1 { font-size: clamp(40px, 15vw, 62px); }
+
+@media (max-height: 760px) {
+  /* The deck has flex:1 but a min-height floor; on short screens that floor
+   * is what shoves the swipe controls off the bottom of the screen. */
+  .deck { min-height: 210px; }
+  .ctrl { height: 60px; }
+  .ctrl.wide { height: 46px; }
+
+  .hero { padding: 0 0 10px; }
+  .hero h1 { margin: 8px 0 6px; }
+  .hero .greeting { font-size: 18px; }
+  .hero p { font-size: 14.5px; }
+  .dietline { margin-top: 8px; padding: 7px 13px; }
+  .streak { padding: 5px 12px; }
+  .btn { padding: 15px 20px; font-size: 16px; }
+  .footer { padding-top: 10px; gap: 8px; }
+  .shell { padding-top: calc(env(safe-area-inset-top) + 8px); }
+}
+
+@media (max-height: 620px) {
+  .deck { min-height: 150px; margin-bottom: 10px; }
+  .ctrl { height: 52px; font-size: 12.5px; }
+  .ctrl.wide { height: 42px; font-size: 14px; }
+  .food-meta { padding: 12px 16px 14px; }
+  .food-name { font-size: 21px; }
+  .food-desc { font-size: 13px; margin-top: 4px; }
+  .tags { margin-top: 9px; }
+  .progress { margin-bottom: 10px; }
+
+  .hero .logo { width: min(112px, 17vh); height: min(112px, 17vh); }
+  .hero h1 { font-size: clamp(34px, 12vw, 44px); margin: 4px 0 4px; }
+  .hero p:not(.greeting) { display: none; }   /* drop the note, keep the greeting */
+  .title { font-size: 26px; margin: 8px 0 6px; }
+  .subtitle { margin-bottom: 12px; font-size: 14.5px; }
+  .option { padding: 11px 14px; }
+  .option .oicon { width: 44px; height: 44px; font-size: 23px; }
+  .btn { padding: 13px 18px; }
 }
