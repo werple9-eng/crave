@@ -120,7 +120,20 @@ pressed. The palette is anchored on a hot red (#eb1700) over clean white cards,
 taking its cue from food-delivery apps — inspired by that look, not copying it:
 no borrowed logo, wordmark or brand asset appears anywhere.
 
-**Still built around appetite.** Warm hues — red, tangerine, mango, butter —
+**Dark mode** follows your system setting on first run, then remembers what you pick (toggle in the home top bar). It is grey, not black: pure black defeats the chunky outlines and reads harsh next to warm food colours.
+
+The theme needs three tokens, not one, because they do not move together:
+
+| token | is | in dark |
+| --- | --- | --- |
+| `--ink` | text *and* the chunky outline | flips to cream |
+| `--shadow-ink` | the hard offset shadow | stays dark — it has to be darker than the card or the shadow vanishes |
+| `--on-accent` | text sitting on a pastel fill | **unchanged** — a cream label on a pastel chip is unreadable |
+
+That last one is the trap: most colour on this page sits on a pastel, so if
+text just inherits `--ink` it becomes invisible the moment the theme flips.
+
+**Still built around appetite.** Warm hues — watermelon, papaya, mango, custard —
 carry roughly two thirds of the surface area and always own the primary
 actions. Lime, mint, berry and grape are pops, not the base. Cool blues and
 greys stay out of it: they read clinical and are famously appetite-suppressing.
