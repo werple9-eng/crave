@@ -40,7 +40,7 @@ export type ArtForm =
   | 'bowl' | 'plate' | 'burger' | 'sandwich' | 'wrap' | 'taco' | 'pizza'
   | 'noodles' | 'cup' | 'scoop' | 'dumpling' | 'toast' | 'stack' | 'roll'
   | 'skewer' | 'box' | 'drumstick' | 'slice'
-  | 'salad' | 'pot' | 'nigiri' | 'pastry' | 'boil'
+  | 'salad' | 'pot' | 'nigiri' | 'pastry' | 'boil' | 'pressed'
 
 export interface FoodArt {
   form: ArtForm

@@ -3,10 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
-    <meta name="theme-color" content="#141013" />
+
+    <title>Crave — Figure out what you actually want to eat</title>
+    <meta name="description" content="Not another 'what cuisine do you want?' app. Answer seven quick questions, swipe fourteen real dishes, get three answers with the reasons they won. 314 dishes, about sixty seconds." />
+
+    <!-- Icons. The SVG is the crisp one modern browsers prefer; the PNGs
+         cover iOS home screen and older tabs. Paths are relative because the
+         site is served from a /crave/ subpath on GitHub Pages. -->
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+
+    <meta name="theme-color" content="#eb1700" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Crave" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Crave</title>
+
+    <!-- Link previews. og:image and og:url have to be absolute URLs - most
+         scrapers won't resolve a relative one, and you get a bare grey card.
+         Update these two if the site ever moves host. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Crave" />
+    <meta property="og:title" content="Crave — Figure out what you actually want to eat" />
+    <meta property="og:description" content="Seven quick questions, fourteen dishes to swipe, three answers with the reasons they won. 314 dishes, about sixty seconds." />
+    <meta property="og:url" content="https://werple9-eng.github.io/crave/" />
+    <meta property="og:image" content="https://werple9-eng.github.io/crave/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Crave — a bowl of something hot, and the line 'figure out what you actually want to eat'." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Crave — Figure out what you actually want to eat" />
+    <meta name="twitter:description" content="Seven quick questions, fourteen dishes to swipe, three answers with the reasons they won." />
+    <meta name="twitter:image" content="https://werple9-eng.github.io/crave/og-image.png" />
   </head>
   <body>
     <div id="root"></div>

@@ -1,13 +1,17 @@
 /* ------------------------------------------------------------------ *
- * Crave — maximalist
+ * Crave — maximalist, delivery-app red
  *
  * Loud on purpose: a saturated multi-colour ground, chunky ink outlines,
  * hard offset shadows, and a different colour for every option.
  *
- * Still built around appetite, though. Warm hues (tomato, tangerine, mango,
- * butter) carry roughly two thirds of the surface area and always own the
- * primary actions; lime, mint, berry and grape are pops, not the base. Cool
- * blues and greys stay out of it — they read clinical and suppress appetite.
+ * The palette takes its cue from food-delivery apps — a hot red
+ * (#eb1700) as the hero on clean white cards. Inspired by that look, not
+ * copying it: no borrowed logo, wordmark or brand asset appears anywhere.
+ *
+ * Still built around appetite. Red, tangerine, mango and butter carry the
+ * surface area and always own the primary actions; lime, mint, berry and
+ * grape are pops, not the base. Cool blues and greys stay out of it — they
+ * read clinical and suppress appetite.
  *
  * Two rules survive from the quieter version, both learned the hard way:
  *   - only `transform` and `opacity` are ever animated (see README)
@@ -15,12 +19,12 @@
  * ------------------------------------------------------------------ */
 
 :root {
-  /* the loud part */
-  --c-tomato: #f5342a;
-  --c-paprika: #e0341f;
-  --c-tangerine: #ff7a14;
-  --c-mango: #ffab1f;
-  --c-butter: #ffd12e;
+  /* the loud part — anchored on a delivery-app red */
+  --c-tomato: #eb1700;
+  --c-paprika: #c81200;
+  --c-tangerine: #ff5a1f;
+  --c-mango: #ff9b21;
+  --c-butter: #ffc933;
   --c-lime: #9ed629;
   --c-basil: #23a55a;
   --c-mint: #12c2a0;
@@ -28,15 +32,15 @@
   --c-grape: #9147d6;
 
   /* ground */
-  --bg: #fff3df;
-  --bg-deep: #ffe3bd;
-  --surface: #fffaf2;
-  --surface-warm: #fff0dc;
+  --bg: #fff6ee;
+  --bg-deep: #ffe0c8;
+  --surface: #ffffff;
+  --surface-warm: #fff1e4;
 
   /* ink — a very dark warm brown, never black */
-  --ink: #2b1408;
-  --ink-soft: #6b3d22;
-  --muted: #99694a;
+  --ink: #191207;
+  --ink-soft: #5c4433;
+  --muted: #8c7565;
   --text: var(--ink);
   --text-soft: var(--ink-soft);
   --line: var(--ink);
@@ -48,7 +52,7 @@
   --chilli: var(--c-tomato);
   --honey: var(--c-mango);
 
-  --grad-hot: linear-gradient(135deg, #ffb020 0%, #ff6a12 46%, #ef2f1e 100%);
+  --grad-hot: linear-gradient(135deg, #ff8a1f 0%, #ff4d0d 44%, #eb1700 100%);
 
   --r-xl: 28px;
   --r-lg: 22px;
@@ -94,13 +98,13 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(38% 26% at 4% 0%, rgba(245, 52, 42, 0.55), rgba(245, 52, 42, 0) 68%),
-    radial-gradient(34% 24% at 96% 6%, rgba(255, 171, 31, 0.72), rgba(255, 171, 31, 0) 66%),
-    radial-gradient(30% 22% at 82% 34%, rgba(236, 47, 110, 0.42), rgba(236, 47, 110, 0) 68%),
-    radial-gradient(34% 24% at 10% 46%, rgba(255, 122, 20, 0.48), rgba(255, 122, 20, 0) 68%),
-    radial-gradient(32% 22% at 92% 74%, rgba(158, 214, 41, 0.44), rgba(158, 214, 41, 0) 68%),
-    radial-gradient(40% 28% at 22% 100%, rgba(255, 209, 46, 0.62), rgba(255, 209, 46, 0) 70%),
-    radial-gradient(30% 20% at 60% 62%, rgba(18, 194, 160, 0.28), rgba(18, 194, 160, 0) 70%);
+    radial-gradient(42% 28% at 2% 0%, rgba(235, 23, 0, 0.62), rgba(235, 23, 0, 0) 68%),
+    radial-gradient(36% 26% at 98% 4%, rgba(255, 90, 31, 0.60), rgba(255, 90, 31, 0) 66%),
+    radial-gradient(30% 22% at 84% 32%, rgba(235, 23, 0, 0.34), rgba(235, 23, 0, 0) 68%),
+    radial-gradient(36% 26% at 8% 44%, rgba(255, 155, 33, 0.52), rgba(255, 155, 33, 0) 68%),
+    radial-gradient(30% 20% at 94% 72%, rgba(158, 214, 41, 0.32), rgba(158, 214, 41, 0) 68%),
+    radial-gradient(44% 30% at 24% 100%, rgba(255, 201, 51, 0.60), rgba(255, 201, 51, 0) 70%),
+    radial-gradient(28% 18% at 62% 60%, rgba(18, 194, 160, 0.20), rgba(18, 194, 160, 0) 70%);
 }
 
 /* Dot screen over the gradients, so the ground has texture up close. */
@@ -108,7 +112,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(43, 20, 8, 0.14) 1.6px, transparent 1.7px);
+  background-image: radial-gradient(rgba(25, 18, 7, 0.13) 1.6px, transparent 1.7px);
   background-size: 16px 16px;
   opacity: 0.55;
 }
@@ -163,7 +167,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   font-weight: 900;
   letter-spacing: -0.04em;
   margin: 14px 0 8px;
-  text-shadow: 2.5px 2.5px 0 rgba(255, 209, 46, 0.9);
+  text-shadow: 2.5px 2.5px 0 rgba(255, 201, 51, 0.95);
 }
 .subtitle {
   color: var(--ink-soft);

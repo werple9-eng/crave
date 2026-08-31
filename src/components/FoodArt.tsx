@@ -315,6 +315,49 @@ const FORMS: Record<ArtForm, (c: Colors, g: Grads, food: Food) => ReactElement> 
     )
   },
 
+  /**
+   * A pressed sandwich: Cuban, croque, patty melt, toastie.
+   *
+   * Drawn from what one actually looks like — squashed flat under a press,
+   * cut on the diagonal, dark grill bars scored across a glossy crust, and a
+   * cut face showing distinct layers of ham, pork, cheese and pickle. The old
+   * triangle wedge was just wrong for these: a Cuban is not a club sandwich.
+   */
+  pressed: (c, g) => {
+    const press = (
+      <g stroke={darken(c.base, 0.42)} strokeWidth="3.4" strokeLinecap="round" opacity="0.75">
+        <path d="M-26 -6 -14 -18M-12 -6 0 -18M2 -6 14 -18M16 -6 26 -16" />
+      </g>
+    )
+    return (
+      <>
+        <ellipse cx="64" cy="108" rx="42" ry="6" fill="rgba(74,34,14,0.10)" />
+
+        {/* the half lying flat, pressed side up */}
+        <g transform="translate(52 86) rotate(-7)">
+          <rect x="-40" y="-17" width="80" height="34" rx="12" fill={darken(c.base, 0.16)} />
+          <rect x="-40" y="-20" width="80" height="34" rx="12" fill={u(g.base)} />
+          <rect x="-40" y="-20" width="80" height="34" rx="12" fill="none" stroke={darken(c.base, 0.3)} strokeWidth="2.4" />
+          <g transform="translate(-4 -3)">{press}</g>
+        </g>
+
+        {/* the half stood on end, cut face toward you */}
+        <g transform="translate(84 54) rotate(13)">
+          <rect x="-25" y="-34" width="50" height="68" rx="11" fill={darken(c.base, 0.2)} />
+          <rect x="-25" y="-36" width="50" height="68" rx="11" fill={u(g.base)} />
+          {/* the layers are the whole point - keep them distinct */}
+          <path d="M-25 -12h50v9h-50z" fill={P.cheese} />
+          <path d="M-25 -3h50v10h-50z" fill={P.pork} />
+          <path d="M-25 7h50v8h-50z" fill="#f6ecd8" />
+          <path d="M-25 15h50v6h-50z" fill={P.scallion} />
+          <rect x="-25" y="-36" width="50" height="68" rx="11" fill="none" stroke={darken(c.base, 0.3)} strokeWidth="2.4" />
+          <g transform="translate(0 -20) scale(0.86)">{press}</g>
+          <path d="M-16 -30c8-3 18-3 26 0" stroke={GLOSS} strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.55" />
+        </g>
+      </>
+    )
+  },
+
   wrap: (c, g) => (
     <>
       <path d="M36 98 78 26a17 17 0 0 1 24 9L60 107a17 17 0 0 1-24-9z" fill={u(g.base)} />
