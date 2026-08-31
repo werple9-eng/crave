@@ -22,9 +22,10 @@ import { QuestionsScreen } from './screens/QuestionsScreen'
 import { SwipeScreen } from './screens/SwipeScreen'
 import { ResultsScreen } from './screens/ResultsScreen'
 import { ProfileScreen } from './screens/ProfileScreen'
+import { CreditsScreen } from './screens/CreditsScreen'
 import { ArtGallery } from './screens/ArtGallery'
 
-type Step = 'home' | 'questions' | 'swipe' | 'results' | 'profile'
+type Step = 'home' | 'questions' | 'swipe' | 'results' | 'profile' | 'credits'
 
 export default function App() {
   const [step, setStep] = useState<Step>('home')
@@ -183,12 +184,16 @@ export default function App() {
           />
         )
 
+      case 'credits':
+        return <CreditsScreen onBack={() => setStep('profile')} />
+
       case 'profile':
         return (
           <ProfileScreen
             history={history}
             onSetDietary={updateDietary}
             onReset={reset}
+            onCredits={() => setStep('credits')}
             onBack={() => setStep('home')}
           />
         )

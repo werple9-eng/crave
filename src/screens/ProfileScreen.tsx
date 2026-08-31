@@ -15,11 +15,12 @@ import type { History } from '../storage/history'
  * "any seafood?" every single time you get hungry.
  */
 export function ProfileScreen({
-  history, onSetDietary, onReset, onBack,
+  history, onSetDietary, onReset, onCredits, onBack,
 }: {
   history: History
   onSetDietary: (dietary: VetoId[]) => void
   onReset: () => void
+  onCredits: () => void
   onBack: () => void
 }) {
   const [confirming, setConfirming] = useState(false)
@@ -129,10 +130,13 @@ export function ProfileScreen({
             <button className="btn-text" onClick={() => setConfirming(false)}>Cancel</button>
           </>
         ) : (
-          <button className="btn-text" onClick={() => setConfirming(true)}>
+          <>
+            <button className="btn-text" onClick={onCredits}>Photo credits</button>
+            <button className="btn-text" onClick={() => setConfirming(true)}>
             <IconTrash size={16} />
             Reset my food preferences
-          </button>
+            </button>
+          </>
         )}
       </div>
     </Screen>

@@ -949,3 +949,139 @@ a.btn { text-decoration: none; }
 [data-theme='dark'] .ctrl.yes { background: #d9ecc0; }
 
 [data-theme='dark'] .backdrop { background: rgba(12, 11, 14, 0.68); }
+
+/* ------------------------------------------------------------------ *
+ * Dish photographs
+ *
+ * A photo fills its container edge to edge — the striped backdrop and the
+ * padding exist for the drawn illustrations, and both look like a mistake
+ * behind a photo. `:has()` keeps that logic here rather than threading a
+ * prop through every caller; where it isn't supported the photo simply
+ * keeps the padding, which still looks fine.
+ * ------------------------------------------------------------------ */
+
+.food-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-art:has(.food-photo) { padding: 0; }
+
+.result .thumb,
+.row .remoji,
+.hero .logo,
+.modal .mart { overflow: hidden; }
+
+/* Photos are lazy-loaded, so give the box a warm fill rather than a flash
+   of empty card while one arrives. */
+.food-art { background-color: var(--surface-warm); }
+
+/* ------------------------------------------------------------------ *
+ * The opener
+ *
+ * Question first, brand small. The teaser strip is doing real work: three
+ * actual dishes, reshuffled each visit, is a far better argument for opening
+ * the app than a logo is.
+ * ------------------------------------------------------------------ */
+
+.opener {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding-top: 4px;
+}
+
+.wordmark {
+  align-self: flex-start;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--on-accent);
+  background: var(--c-butter);
+  border: 2.5px solid var(--ink);
+  border-radius: 999px;
+  padding: 5px 14px;
+  box-shadow: var(--pop-sm);
+}
+
+.opener-h {
+  font-size: clamp(32px, 9.5vw, 42px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.06;
+  margin: 18px 0 8px;
+  text-shadow: 2.5px 2.5px 0 var(--c-butter);
+}
+
+.opener-sub {
+  color: var(--ink-soft);
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.4;
+  margin: 0 0 20px;
+}
+
+/* three dishes, fanned */
+/* The strip grows into whatever height is going spare: on a tall phone the
+ * space is better spent on pictures of food than on emptiness. */
+.teaser {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: stretch;
+  flex: 1;
+  min-height: 130px;
+  max-height: 240px;
+  margin: 2px 0 18px;
+}
+.teaser-card {
+  /* No height:100% — a percentage needs a definite parent height and the
+   * flex row has not resolved one yet. align-items:stretch does it properly. */
+  flex: 1;
+  min-width: 0;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(-45deg, var(--art-a) 0 14px, var(--art-b) 14px 28px);
+  box-shadow: var(--pop);
+  transform: rotate(calc((var(--i) - 1) * 3deg)) translateY(calc(var(--i) * -2px));
+  animation: teaserIn 0.5s var(--spring);
+}
+@keyframes teaserIn { from { opacity: 0; transform: translate3d(0, 18px, 0) scale(0.92); } }
+.teaser-card svg,
+.teaser-card img { width: 100%; height: 100%; object-fit: cover; }
+
+.opener-meta { display: grid; gap: 10px; }
+.metaline { font-size: 14.5px; font-weight: 650; color: var(--ink-soft); }
+.metaline strong { color: var(--ink); font-weight: 900; }
+.opener-chips { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+
+/* the one button that matters gets more weight than the rest */
+.btn-hero { padding: 20px 22px; font-size: 18.5px; }
+
+@media (max-height: 700px) {
+  .opener-h { margin: 12px 0 6px; }
+  .opener-sub { margin-bottom: 12px; font-size: 14.5px; }
+  .teaser { margin-bottom: 12px; }
+  .teaser { max-height: 190px; }
+  .btn-hero { padding: 15px 20px; font-size: 16.5px; }
+}
+
+/* photo credits */
+.credits { display: grid; gap: 8px; padding-bottom: 12px; }
+.credit {
+  display: block;
+  background: var(--surface);
+  border: 2.5px solid var(--ink);
+  border-radius: var(--r-sm);
+  padding: 10px 13px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--pop-sm);
+}
+.credit-title { display: block; font-size: 14px; font-weight: 800; line-height: 1.25; }
+.credit-meta { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); margin-top: 2px; }

@@ -1,13 +1,28 @@
 import { useMemo } from 'react'
-import { FOODS } from '../data/foods'
+import type { CSSProperties } from 'react'
+import { FOODS, FOOD_BY_ID } from '../data/foods'
+import { PHOTOS } from '../data/photos'
 import { DIETARY_OPTIONS } from '../data/questions'
 import { FoodArt } from '../components/FoodArt'
 import { Screen } from '../components/ui'
-import { IconDice, IconFlame, IconMoon, IconSun, IconUser, IconUtensils } from '../components/icons'
+import {
+  IconDice, IconFlame, IconForward, IconMoon, IconSun, IconUser, IconUtensils,
+} from '../components/icons'
 import { currentDaypart, DAYPART_GREETING, DAYPART_NOTE } from '../engine/daypart'
 import type { History } from '../storage/history'
 import type { Theme } from '../storage/theme'
 
+/**
+ * The opening screen.
+ *
+ * It used to be a centred logo with the app's name under it — a splash
+ * screen, basically, which told you nothing and made you read a brand before
+ * you could do the one thing you came for.
+ *
+ * Now the question is the headline, a strip of real dishes does the work of
+ * making you hungry, and the answer to "what did I have last time?" is right
+ * there. The brand is a small mark in the corner where it belongs.
+ */
 export function HomeScreen({
   history, theme, onStart, onSurprise, onProfile, onToggleTheme,
 }: {
@@ -18,10 +33,29 @@ export function HomeScreen({
   onSurprise: () => void
   onProfile: () => void
 }) {
-  // A different dish greets you each time you open it. Costs nothing, and
-  // the app feels awake rather than static.
-  const hero = useMemo(() => FOODS[Math.floor(Math.random() * FOODS.length)], [])
   const daypart = useMemo(() => currentDaypart(), [])
+
+  /**
+   * Three dishes across the top, favouring ones we have a photo of.
+   *
+   * Reshuffled every visit: seeing actual food is what makes you hungry, and
+   * it quietly shows how much is in here.
+   */
+  const teaser = useMemo(() => {
+    const withPhotos = FOODS.filter((f) => PHOTOS[f.id])
+    const pool = withPhotos.length >= 12 ? withPhotos : FOODS
+    const picked: typeof FOODS = []
+    const seen = new Set<string>()
+    while (picked.length < 3 && seen.size < pool.length) {
+      const f = pool[Math.floor(Math.random() * pool.length)]
+      if (seen.has(f.id)) continue
+      seen.add(f.id)
+      picked.push(f)
+    }
+    return picked
+  }, [])
+
+  const lastPick = history.recentPicks[0] ? FOOD_BY_ID[history.recentPicks[0]] : undefined
 
   const dietary = history.dietary
     .map((id) => DIETARY_OPTIONS.find((o) => o.value === id)?.label)
@@ -29,7 +63,6 @@ export function HomeScreen({
 
   return (
     <Screen
-      center
       right={
         <>
           <button
@@ -46,7 +79,10 @@ export function HomeScreen({
       }
       footer={
         <>
-          <button className="btn btn-primary" onClick={onStart}>Find my food</button>
+          <button className="btn btn-primary btn-hero" onClick={onStart}>
+            Find my food
+            <IconForward size={20} />
+          </button>
           <button className="btn btn-ghost" onClick={onSurprise}>
             <IconDice size={20} />
             Just tell me what to eat
@@ -54,30 +90,41 @@ export function HomeScreen({
         </>
       }
     >
-      <div className="hero">
-        <div className="logo">
-          <FoodArt food={hero} />
+      <div className="opener">
+        <span className="wordmark">Crave</span>
+
+        <h1 className="opener-h">{DAYPART_GREETING[daypart]}</h1>
+        {/* The time-of-day nudge is stated out loud rather than applied behind
+          * your back — it changes what you're shown. */}
+        <p className="opener-sub">{DAYPART_NOTE[daypart]}</p>
+
+        <div className="teaser" aria-hidden="true">
+          {teaser.map((food, i) => (
+            <div className="teaser-card" key={food.id} style={{ '--i': i } as CSSProperties}>
+              <FoodArt food={food} />
+            </div>
+          ))}
         </div>
-        <h1>Crave</h1>
-        {/* The time-of-day nudge is stated out loud rather than applied
-          * behind your back - it changes what you're shown, so you should
-          * be able to see that it's happening. */}
-        <p className="greeting">{DAYPART_GREETING[daypart]}</p>
-        <p>{DAYPART_NOTE[daypart]}</p>
 
-        {history.sessions > 0 && (
-          <div style={{ marginTop: 18 }}>
-            <span className="streak">
-              <IconFlame size={15} />
-              {history.sessions} {history.sessions === 1 ? 'round' : 'rounds'} played
+        <div className="opener-meta">
+          {lastPick && (
+            <span className="metaline">
+              Last time you picked <strong>{lastPick.name}</strong>
             </span>
+          )}
+          <div className="opener-chips">
+            {history.sessions > 0 && (
+              <span className="streak">
+                <IconFlame size={15} />
+                {history.sessions} {history.sessions === 1 ? 'round' : 'rounds'}
+              </span>
+            )}
+            <button className="dietline" onClick={onProfile}>
+              <IconUtensils size={15} />
+              {dietary.length > 0 ? dietary.join(' · ') : 'No dietary rules'}
+            </button>
           </div>
-        )}
-
-        <button className="dietline" onClick={onProfile}>
-          <IconUtensils size={15} />
-          {dietary.length > 0 ? dietary.join(' · ') : 'No dietary rules set'}
-        </button>
+        </div>
       </div>
     </Screen>
   )

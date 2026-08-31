@@ -71,7 +71,7 @@ export function ArtGallery() {
                   padding: 6,
                 }}
               >
-                <FoodArt food={food} />
+                <FoodArt food={food} drawn />
               </div>
               <div className="slabel" style={{ fontWeight: 800, color: 'var(--text)' }}>{form}</div>
               <div className="slabel">{food.name}</div>

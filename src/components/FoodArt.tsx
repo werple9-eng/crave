@@ -1,6 +1,7 @@
-import { useId } from 'react'
+import { useId, useState } from 'react'
 import type { ReactElement } from 'react'
 import type { ArtForm, Food } from '../types'
+import { PHOTOS } from '../data/photos'
 import {
   P, fillFor, noodleCoil, renderToppings, riceField, toppingsFor,
 } from './foodParts'
@@ -30,8 +31,8 @@ import {
  *   5. the *front* half of the rim only, drawn over the contents
  *   6. gloss and foot
  *
- * To swap in real photography, add a `photo` field to Food and branch at the
- * bottom of this file; nothing else in the app changes.
+ * These are the *fallback* now: dishes with a real photo in data/photos.ts
+ * render that instead, and drop back to the drawing if the image fails.
  */
 
 /* ------------------------- colour helpers ------------------------- */
@@ -687,16 +688,44 @@ function garnishesFor(food: Food): ReactElement[] {
 /* ---------------------------- component --------------------------- */
 
 export function FoodArt({
-  food, className, animate = false,
+  food, className, animate = false, drawn = false,
 }: {
   food: Food
   className?: string
   /** Adds the gentle idle float used on the big swipe cards. */
   animate?: boolean
+  /** Force the illustration even where a photo exists (used by #gallery). */
+  drawn?: boolean
 }) {
+  // Every hook runs before the early return below - React requires the same
+  // hooks in the same order on every render, and the photo branch bails out.
+  const raw = useId()
+  const [photoFailed, setPhotoFailed] = useState(false)
+  const photoUrl = drawn ? undefined : PHOTOS[food.id]
+
+  /**
+   * A real photograph of the dish, where we have one.
+   *
+   * 68 different dishes shared the `plate` illustration, which is why so many
+   * of them didn't look like the food. A photo is unambiguous. The drawing is
+   * still the fallback - for dishes with no confident match, and for any
+   * image that fails to load - so the card is never empty.
+   */
+  if (photoUrl && !photoFailed) {
+    return (
+      <img
+        className={['food-photo', className].filter(Boolean).join(' ')}
+        src={photoUrl}
+        alt={food.name}
+        loading="lazy"
+        decoding="async"
+        onError={() => setPhotoFailed(true)}
+      />
+    )
+  }
+
   // Gradient ids must be unique per instance - the same dish can appear on a
   // card, a ghost card behind it and a results thumbnail all at once.
-  const raw = useId()
   const uid = `fa${raw.replace(/[^a-zA-Z0-9]/g, '')}`
   const g: Grads = {
     base: `${uid}b`, accent: `${uid}a`, vessel: `${uid}v`, gloss: `${uid}g`,
