@@ -60,12 +60,6 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     page: "https://commons.wikimedia.org/wiki/File:8-7-2022_Seafood_boil_-_003.jpg",
   },
   {
-    title: "A home made plate of mutton biryani served with chicken kassa cooked in the bengali style",
-    author: "Subhrajyoti07",
-    licence: "CC BY-SA 4.0",
-    page: "https://commons.wikimedia.org/wiki/File:A_home_made_plate_of_mutton_biryani_served_with_chicken_kassa_cooked_in_the_bengali_style.jpg",
-  },
-  {
     title: "Allgäuer Schnitzel mit Kräuterrösti",
     author: "Kritzolina",
     licence: "CC BY-SA 4.0",
@@ -88,12 +82,6 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     author: "Cajsa Lilliehook from Portland",
     licence: "CC BY-SA 2.0",
     page: "https://commons.wikimedia.org/wiki/File:Bacon_Kale_Breakfast_Burrito_(8429773809).jpg",
-  },
-  {
-    title: "Baklava shop, Damascus, Syria - 1",
-    author: "James Gordon from Los Angeles, California, USA",
-    licence: "CC BY 2.0",
-    page: "https://commons.wikimedia.org/wiki/File:Baklava_shop,_Damascus,_Syria_-_1.jpg",
   },
   {
     title: "Banana pudding, homemade",
@@ -270,6 +258,12 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     page: "https://commons.wikimedia.org/wiki/File:Chicken_and_waffles_with_peaches_and_cream.jpg",
   },
   {
+    title: "Chicken biriyani- My cafe restaurant - Meghalaya DSC 009",
+    author: "Gitika Gayan",
+    licence: "CC BY-SA 4.0",
+    page: "https://commons.wikimedia.org/wiki/File:Chicken_biriyani-_My_cafe_restaurant_-_Meghalaya_DSC_009.jpg",
+  },
+  {
     title: "Chicken Noodle Soup US",
     author: "Nichijyou123",
     licence: "CC BY-SA 4.0",
@@ -438,10 +432,22 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     page: "https://commons.wikimedia.org/wiki/File:Eggs_Benedict2.jpg",
   },
   {
+    title: "Elote asándose",
+    author: "ProtoplasmaKid",
+    licence: "CC BY-SA 3.0",
+    page: "https://commons.wikimedia.org/wiki/File:Elote_as%C3%A1ndose.jpg",
+  },
+  {
     title: "Empanada - Stu Spivack",
     author: "stu_spivack",
     licence: "CC BY-SA 2.0",
     page: "https://commons.wikimedia.org/wiki/File:Empanada_-_Stu_Spivack.jpg",
+  },
+  {
+    title: "Enchiladas de mole caseras",
+    author: "Alejandra Mendoza Santillan",
+    licence: "CC BY-SA 4.0",
+    page: "https://commons.wikimedia.org/wiki/File:Enchiladas_de_mole_caseras.jpg",
   },
   {
     title: "Espaguetis carbonara",
@@ -460,12 +466,6 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     author: "Bradleyzm",
     licence: "CC BY-SA 4.0",
     page: "https://commons.wikimedia.org/wiki/File:Feijoada_%C3%A0_brasileira_-02.jpg",
-  },
-  {
-    title: "Festival de la Enchilada 59",
-    author: "Lameirasb",
-    licence: "CC BY-SA 4.0",
-    page: "https://commons.wikimedia.org/wiki/File:Festival_de_la_Enchilada_59.jpg",
   },
   {
     title: "Fish and chips plate with peas",
@@ -706,6 +706,12 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     author: "Unknown author",
     licence: "CC BY-SA 3.0",
     page: "https://commons.wikimedia.org/wiki/File:Jerk_chicken_july_05.jpg",
+  },
+  {
+    title: "Jjajangmyeon 짜장면 炸醬麵",
+    author: "Scarlet Sappho",
+    licence: "CC BY-SA 2.0",
+    page: "https://commons.wikimedia.org/wiki/File:Jjajangmyeon_%EC%A7%9C%EC%9E%A5%EB%A9%B4_%E7%82%B8%E9%86%AC%E9%BA%B5.jpg",
   },
   {
     title: "Katsu sando (37686169334)",
@@ -1212,10 +1218,10 @@ export const PHOTO_CREDITS: PhotoCredit[] = [
     page: "https://commons.wikimedia.org/wiki/File:Sushi_lunch_%EF%BF%A5980,_Nadeshico-Sushi,_Sotokanda_3_(%E3%81%AA%E3%81%A7%E3%81%97%E3%81%93%E5%AF%BF%E5%8F%B8%E3%83%A9%E3%83%B3%E3%83%81980%E5%86%86)_(2011-04-06_13.34.21_by_yuiseki_aoba).jpg",
   },
   {
-    title: "Sushi rolls placed on their display stand",
-    author: "Jameswasswa",
-    licence: "CC BY-SA 4.0",
-    page: "https://commons.wikimedia.org/wiki/File:Sushi_rolls_placed_on_their_display_stand.jpg",
+    title: "Sushi rolls (3273983262)",
+    author: "Geoff Peters from Vancouver, BC, Canada",
+    licence: "CC BY 2.0",
+    page: "https://commons.wikimedia.org/wiki/File:Sushi_rolls_(3273983262).jpg",
   },
   {
     title: "Tagliatelle ragù bolognese 01",

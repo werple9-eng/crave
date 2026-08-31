@@ -8,11 +8,11 @@
  * looked like one of three images, which is exactly why so many dishes did
  * not resemble the food. A photograph is unambiguous.
  *
- * 285 of 312 dishes have one; the other 27 keep their illustration.
+ * 283 of 312 dishes have one; the other 29 keep their illustration.
  * `FoodArt` also falls back to the drawing if an image fails to load, so a
  * card is never empty.
  *
- * Hotlinked rather than copied into the repo: vendoring all 285 would add
+ * Hotlinked rather than copied into the repo: vendoring all 283 would add
  * roughly 48MB to git, and the CDN rate-limits a bulk download anyway. A
  * session only pulls the dozen or so images it actually shows.
  *
@@ -29,7 +29,7 @@ export const PHOTOS: Record<string, string> = {
   'bacon-cheeseburger': "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Burger_King_Double_Bacon_Cheeseburger_%2830596371113%29.jpg/960px-Burger_King_Double_Bacon_Cheeseburger_%2830596371113%29.jpg",
   'bacon-egg-cheese': "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/McD-Bacon-Egg-Cheese-McGriddle.jpg/960px-McD-Bacon-Egg-Cheese-McGriddle.jpg",
   'bagel-lox': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Lox_Bagel_Sandwich_with_Cream_Cheese_Schmear_Onion_Tomato.jpg/960px-Lox_Bagel_Sandwich_with_Cream_Cheese_Schmear_Onion_Tomato.jpg",
-  'baklava': "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Baklava_shop%2C_Damascus%2C_Syria_-_1.jpg/960px-Baklava_shop%2C_Damascus%2C_Syria_-_1.jpg",
+  'baklava': "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Baklava_-_Turkish_special%2C_80-ply.JPEG/960px-Baklava_-_Turkish_special%2C_80-ply.JPEG",
   'banana-pudding': "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Banana_pudding%2C_homemade.jpg/960px-Banana_pudding%2C_homemade.jpg",
   'bangers-and-mash': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Bangers_and_mash_-_The_Perkin_Warbeck_2025-07-26.jpg/960px-Bangers_and_mash_-_The_Perkin_Warbeck_2025-07-26.jpg",
   'banh-mi': "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Special_Baguette_%28B%C3%A1nh_m%C3%AC%29_-_Banh_Mi_Ancient_Saigon_2024-12-20.jpg/960px-Special_Baguette_%28B%C3%A1nh_m%C3%AC%29_-_Banh_Mi_Ancient_Saigon_2024-12-20.jpg",
@@ -42,7 +42,7 @@ export const PHOTOS: Record<string, string> = {
   'beignets': "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Beignet_maker.jpg/960px-Beignet_maker.jpg",
   'bibimbap': "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Bokkeum_Bibimbap_and_Little_Piggy_Bao_Bun_by_Bao_Bun_Brighton.jpg/960px-Bokkeum_Bibimbap_and_Little_Piggy_Bao_Bun_by_Bao_Bun_Brighton.jpg",
   'birria-tacos': "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Birria_tacos_at_Teddy%27s_Red_Tacos_in_Venice%2C_California.jpg/960px-Birria_tacos_at_Teddy%27s_Red_Tacos_in_Venice%2C_California.jpg",
-  'biryani': "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/A_home_made_plate_of_mutton_biryani_served_with_chicken_kassa_cooked_in_the_bengali_style.jpg/960px-A_home_made_plate_of_mutton_biryani_served_with_chicken_kassa_cooked_in_the_bengali_style.jpg",
+  'biryani': "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Chicken_biriyani-_My_cafe_restaurant_-_Meghalaya_DSC_009.jpg/960px-Chicken_biriyani-_My_cafe_restaurant_-_Meghalaya_DSC_009.jpg",
   'biscuits-gravy': "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Biscuits_and_sausage_gravy_%288006401964%29.jpg/960px-Biscuits_and_sausage_gravy_%288006401964%29.jpg",
   'blt': "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/BLT_sandwich_with_pommes_frites.jpg/960px-BLT_sandwich_with_pommes_frites.jpg",
   'bolognese': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Tagliatelle_rag%C3%B9_bolognese_01.jpg/960px-Tagliatelle_rag%C3%B9_bolognese_01.jpg",
@@ -53,7 +53,7 @@ export const PHOTOS: Record<string, string> = {
   'breakfast-sandwich-bagel': "https://upload.wikimedia.org/wikipedia/commons/8/8b/Sausage_Taylor_Ham_Egg_Cheese_on_Pumpernickel_Bagel%2Cjpg.jpg",
   'breakfast-tacos': "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Breakfast_tacos_2018.jpg/960px-Breakfast_tacos_2018.jpg",
   'brownie-sundae': "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/BROWNIE_SUNDAE.jpg/960px-BROWNIE_SUNDAE.jpg",
-  'bubble-tea': "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Bubble_tea_six_languages.jpg/960px-Bubble_tea_six_languages.jpg",
+  'bubble-tea': "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pearl_Milk_Tea_in_Chun_Shui_Tang.jpg/960px-Pearl_Milk_Tea_in_Chun_Shui_Tang.jpg",
   'budae-jjigae': "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Korean_stew-Budae_jjigae-01.jpg/960px-Korean_stew-Budae_jjigae-01.jpg",
   'buddha-bowl': "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/BuddhaBowlLot.jpg/960px-BuddhaBowlLot.jpg",
   'bulgogi-bowl': "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Korean_Beef_Bulgogi_Rice_Bowl_%2834817154336%29.jpg/960px-Korean_Beef_Bulgogi_Rice_Bowl_%2834817154336%29.jpg",
@@ -119,9 +119,9 @@ export const PHOTOS: Record<string, string> = {
   'drunken-noodles': "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Drunken_noodles_%28pad_kee_mao%29.jpg/960px-Drunken_noodles_%28pad_kee_mao%29.jpg",
   'eclair': "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Giant_chocolate-glazed_%C3%A9clairs.jpg/960px-Giant_chocolate-glazed_%C3%A9clairs.jpg",
   'eggs-benedict': "https://upload.wikimedia.org/wikipedia/commons/7/7a/Eggs_Benedict2.jpg",
-  'elote': "https://upload.wikimedia.org/wikipedia/commons/6/67/Elote_recipe.jpg",
+  'elote': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Elote_as%C3%A1ndose.jpg/960px-Elote_as%C3%A1ndose.jpg",
   'empanadas': "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Empanada_-_Stu_Spivack.jpg/960px-Empanada_-_Stu_Spivack.jpg",
-  'enchiladas': "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Festival_de_la_Enchilada_59.jpg/960px-Festival_de_la_Enchilada_59.jpg",
+  'enchiladas': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Enchiladas_de_mole_caseras.jpg/960px-Enchiladas_de_mole_caseras.jpg",
   'etouffee': "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Crawfish_%C3%A9touff%C3%A9e_at_the_Gumbo_Shop%2C_New_Orleans_January_2025.jpg/960px-Crawfish_%C3%A9touff%C3%A9e_at_the_Gumbo_Shop%2C_New_Orleans_January_2025.jpg",
   'falafel-plate': "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Meatballs_and_falafel_balls_on_a_plate.jpg/960px-Meatballs_and_falafel_balls_on_a_plate.jpg",
   'fattoush': "https://upload.wikimedia.org/wikipedia/commons/9/93/Fattoush_mixed-salad.jpg",
@@ -167,7 +167,7 @@ export const PHOTOS: Record<string, string> = {
   'jambalaya': "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Jambalaya_%2830750226186%29.jpg/960px-Jambalaya_%2830750226186%29.jpg",
   'japchae': "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Homemade_Japchae%2C_Dhaka_03.jpg/960px-Homemade_Japchae%2C_Dhaka_03.jpg",
   'jerk-chicken': "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Jerk_chicken_july_05.jpg/960px-Jerk_chicken_july_05.jpg",
-  'jjajangmyeon': "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Shandong_Zhajiangmian_and_Korean_Jjajangmyeon.jpg/960px-Shandong_Zhajiangmian_and_Korean_Jjajangmyeon.jpg",
+  'jjajangmyeon': "https://upload.wikimedia.org/wikipedia/commons/2/23/Jjajangmyeon_%EC%A7%9C%EC%9E%A5%EB%A9%B4_%E7%82%B8%E9%86%AC%E9%BA%B5.jpg",
   'katsu-curry': "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Pumpkin_Katsu_Curry_and_Chicken_Katsu_Curry_-_Sunoso.jpg/960px-Pumpkin_Katsu_Curry_and_Chicken_Katsu_Curry_-_Sunoso.jpg",
   'katsu-sando': "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Katsu_sando_%2837686169334%29.jpg/960px-Katsu_sando_%2837686169334%29.jpg",
   'kebab-shop-wrap': "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Doner_Kebab%2C_sols_carn_i_lletuga..jpg/960px-Doner_Kebab%2C_sols_carn_i_lletuga..jpg",
@@ -200,7 +200,6 @@ export const PHOTOS: Record<string, string> = {
   'matzo-ball-soup': "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Matzo_ball_soup_2.jpg/960px-Matzo_ball_soup_2.jpg",
   'meatball-sub': "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Pizza_Meatball_sub%2C_Firehouse_Subs.jpg/960px-Pizza_Meatball_sub%2C_Firehouse_Subs.jpg",
   'meatloaf': "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Meatloaf_With_Cauliflower_Pumpkin_Mash_And_Avocado_%2867915371%29.jpeg/960px-Meatloaf_With_Cauliflower_Pumpkin_Mash_And_Avocado_%2867915371%29.jpeg",
-  'mediterranean-bowl': "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Gold-glass_bowl%2C_eastern_Mediterranean%2C_perhaps_Alexandria%2C_c._250_BC_gold%2C_glass_-_British_Museum_-_DSC01088.jpg/960px-Gold-glass_bowl%2C_eastern_Mediterranean%2C_perhaps_Alexandria%2C_c._250_BC_gold%2C_glass_-_British_Museum_-_DSC01088.jpg",
   'milkshake': "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/San_Vicente%2C_Milkshake%2C_Palawan%2C_Philippines.jpg/960px-San_Vicente%2C_Milkshake%2C_Palawan%2C_Philippines.jpg",
   'minestrone': "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Minestrone_soup.jpg/960px-Minestrone_soup.jpg",
   'miso-soup': "https://upload.wikimedia.org/wikipedia/commons/5/55/Miso_soup_and_Rice_20141027.jpg",
@@ -280,7 +279,7 @@ export const PHOTOS: Record<string, string> = {
   'summer-rolls': "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Summer_rolls%2C_chicken%2C_etc_%2C_on_salad_-_Cambridge%2C_MA.jpg/960px-Summer_rolls%2C_chicken%2C_etc_%2C_on_salad_-_Cambridge%2C_MA.jpg",
   'sundubu': "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Korean_food-Gyeongju-Sundubu_jjigae-02.jpg/960px-Korean_food-Gyeongju-Sundubu_jjigae-02.jpg",
   'sushi-lunch-set': "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Sushi_lunch_%EF%BF%A5980%2C_Nadeshico-Sushi%2C_Sotokanda_3_%28%E3%81%AA%E3%81%A7%E3%81%97%E3%81%93%E5%AF%BF%E5%8F%B8%E3%83%A9%E3%83%B3%E3%83%81980%E5%86%86%29_%282011-04-06_13.34.21_by_yuiseki_aoba%29.jpg/960px-Sushi_lunch_%EF%BF%A5980%2C_Nadeshico-Sushi%2C_Sotokanda_3_%28%E3%81%AA%E3%81%A7%E3%81%97%E3%81%93%E5%AF%BF%E5%8F%B8%E3%83%A9%E3%83%B3%E3%83%81980%E5%86%86%29_%282011-04-06_13.34.21_by_yuiseki_aoba%29.jpg",
-  'sushi-rolls': "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Sushi_rolls_placed_on_their_display_stand.jpg/960px-Sushi_rolls_placed_on_their_display_stand.jpg",
+  'sushi-rolls': "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Sushi_rolls_%283273983262%29.jpg/960px-Sushi_rolls_%283273983262%29.jpg",
   'tabbouleh': "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flickr_-_cyclonebill_-_Tabbouleh.jpg/960px-Flickr_-_cyclonebill_-_Tabbouleh.jpg",
   'taiyaki': "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Taiyaki_005.jpg/960px-Taiyaki_005.jpg",
   'tamales': "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Tamales_Mexicanos_sweet_corn_tamales_01.jpg/960px-Tamales_Mexicanos_sweet_corn_tamales_01.jpg",
@@ -302,7 +301,6 @@ export const PHOTOS: Record<string, string> = {
   'vindaloo': "https://upload.wikimedia.org/wikipedia/commons/f/fd/Pork_Vindaloo.jpg",
   'vodka-pasta': "https://upload.wikimedia.org/wikipedia/commons/2/25/Penne_Pasta_cooked_in_Red_Sauce_and_Vodka.jpg",
   'waffles': "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Belgian_Waffle_Co_%282024%29_02.jpg/960px-Belgian_Waffle_Co_%282024%29_02.jpg",
-  'warm-cookie': "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Crumbl_Cookies_-_December_2024_-_Sarah_Stierch_02.jpg/960px-Crumbl_Cookies_-_December_2024_-_Sarah_Stierch_02.jpg",
   'wonton-soup': "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/FOOD_Wonton_Soup.jpg/960px-FOOD_Wonton_Soup.jpg",
   'yakitori': "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cooking_yakitori.jpg/960px-Cooking_yakitori.jpg",
 }
