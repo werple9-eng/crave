@@ -82,7 +82,9 @@ The flow is: **seven questions → swipe fourteen dishes → three answers.**
 
 ```
 src/
-  data/foods.ts          314 dishes, hand-labeled with attributes
+  data/foods.ts          312 dishes, hand-labeled with attributes
+  data/photos.ts         283 dish photographs (generated)
+  data/photoCredits.ts   attribution, lazy-loaded (generated)
   data/questions.ts      the questionnaire, as data
   components/FoodArt.tsx vessels + forms
   components/foodParts.tsx the parts dishes are composed from
@@ -144,38 +146,40 @@ instantly readable and carry their own colour, which is exactly what a
 maximalist picker wants; the chrome (back, undo, heart, trash) stays on the
 drawn 24px icon set so it holds up small and inherits `currentColor`.
 
-**Pictures.** Dishes are *composed*, not drawn one by one. This is the single
-most important thing in the art, and getting it wrong is what made the app look
-generated: the first version put one anonymous beige mound in a bowl and reused
-it for fifty-nine dishes, so ramen, mac and cheese and açaí all came out
-identical.
+**Pictures.** 283 of the 312 dishes use a real photograph from Wikimedia
+Commons; the other 29 keep a drawn illustration, and `FoodArt` falls back to
+the drawing if an image fails to load, so a card is never empty.
 
-Real food photography reads instantly for a specific reason — a bowl of ramen
-isn't a mound, it's four or five **distinct, high-contrast objects** arranged
-around the bowl (a halved egg, folded chashu, a sheet of nori, a scatter of
-scallion) sitting on a broth field. You identify the dish from the *toppings*,
-not the vessel. So a dish is built from three layers:
+This replaced a drawn-only system for a structural reason an audit made
+obvious: 24 silhouettes had to cover 312 dishes, so 68 of them shared the
+`plate` picture and 62 shared `bowl`. Half the library was one of three
+images. That is not fixable by reassigning forms — only 10 assignments were
+even arguable, and on review all 10 were already correct.
 
-| layer | where | what |
-| --- | --- | --- |
-| vessel | `FoodArt.tsx` | bowl, plate, pot, salad bowl, seen from steeply above |
-| fill | `foodParts.tsx` | the field: broth, rice, greens, sauce, noodles |
-| toppings | `foodParts.tsx` | 3-4 identifiable objects, picked from the dish's own data |
+Two lessons if you ever regenerate them:
 
-`toppingsFor()` reads a dish's category, cuisine and tags, so adding a dish to
-`foods.ts` still needs nothing but its attributes — it composes its own picture.
-Anything seafood-tagged gets a prawn, anything above spice 3 gets chilli slices,
-Japanese and Korean dishes get sesame.
+- **Guard the search.** A naive top result returns the Smashburger *company
+  logo* for "Smashburger". The fetcher rejects logos, signage, packaging,
+  museums, festivals and shop fronts, and requires the file name to share a
+  word with the dish name.
+- **Word overlap is not enough.** "Bubble tea six languages" shares both
+  words and is a photograph of a menu board. Titles are re-scanned afterwards
+  for anything suggesting the subject is not food on a plate, and a dish with
+  no clean alternative is dropped rather than kept — the illustration beats a
+  picture of a display cabinet.
 
-They load instantly, never 404, carry no licence, and match the palette exactly.
-To move to real photography, add a `photo` field to `Food` and branch in
-`FoodArt.tsx`; nothing else changes.
+Also worth knowing: the first fetch reported 190 dishes with "no photo", but
+almost all of those were HTTP 429s being swallowed as misses. Retrying with
+backoff recovered 163 of them. Rate limiting and absence look identical if
+you do not check.
 
-Two smaller traps worth remembering: a plate needs a **main mass** under the
-toppings or a dish whose category yields only garnishes renders as an empty
-plate; and a saucy dish should be filled with its *base* colour, not its accent
-— the accent is the darker of the two and a dark field swallows everything
-sitting on it.
+Photos are hotlinked rather than copied into the repo: vendoring all 283
+would add roughly 48MB to git, and the CDN rate-limits a bulk download (it
+429'd after 15). Attribution lives in `photoCredits.ts`, dynamically imported
+so 38KB of licence text stays out of the initial bundle.
+
+The illustration system is still there behind the photos — vessel + fill +
+toppings, composed from each dish's own data. See `foodParts.tsx`.
 
 Run the dev server and open **`#gallery`** to see every form on one contact
 sheet. Drawing twenty-three silhouettes without that means fixing one and
