@@ -1,10 +1,12 @@
 /* ------------------------------------------------------------------ *
- * Crave — clean delivery-app look
+ * Crave — flat, rainforest palette
  *
- * White ground, one hot red for anything you can act on, near-black text,
- * hairline gray dividers, soft shadows. The food is the only loud thing on
- * the page, which is the whole idea: a photo of dinner competes badly with
- * a seven-stop gradient behind it.
+ * Warm cream ground, scarlet for anything you can act on, deep-forest ink,
+ * hairline sand dividers, soft shadows. Colours come from a flat rainforest
+ * illustration: macaw red and blue, canopy greens, toucan amber, sky cream.
+ *
+ * Still flat, and still the same rule: the food is the only loud thing on the
+ * page, because a photo of dinner competes badly with a busy background.
  *
  * Inspired by the delivery-app look, not copying it: no borrowed logo,
  * wordmark or brand asset appears anywhere.
@@ -19,49 +21,49 @@
    * color rather than as washed-out gray. Every one of these carries dark
    * text and a dark outline, which is what keeps a pastel set from going
    * weak. Warm hues still own the primary actions. */
-  --c-tomato: #eb1700;
-  --c-paprika: #c81400;
-  --c-tangerine: #ff6d3f;
-  --c-mango: #ff9f1c;
-  --c-butter: #ffd166;
-  --c-lime: #3d9b52;
-  --c-basil: #2f8a52;
-  --c-mint: #0f9b8e;
-  --c-berry: #d6336c;
-  --c-grape: #7048e8;
+  --c-tomato: #e03a2f;
+  --c-paprika: #b82c22;
+  --c-tangerine: #f2801e;
+  --c-mango: #f5a623;
+  --c-butter: #f7d774;
+  --c-lime: #8fb43c;
+  --c-basil: #2f6b43;
+  --c-mint: #4a7fa8;
+  --c-berry: #e06b96;
+  --c-grape: #8a6fc0;
 
   /* ground */
-  --bg: #ffffff;
-  --bg-deep: #f7f7f7;
-  --surface: #ffffff;
-  --surface-warm: #f7f7f7;
+  --bg: #fdf3e3;
+  --bg-deep: #f8e7d0;
+  --surface: #fffdf8;
+  --surface-warm: #f7ecd9;
 
   /* Ink does double duty as text *and* as the chunky outline, so it flips
    * with the theme. The hard shadow needs its own token: in dark mode the
    * outline goes light while the shadow has to stay darker than the card. */
-  --ink: #191919;
-  --shadow-ink: rgba(0, 0, 0, 0.10);
+  --ink: #1f3d2b;
+  --shadow-ink: rgba(52, 38, 20, 0.13);
   /* Text sitting ON a pastel fill. Stays dark in BOTH themes - a cream
    * label on a pastel chip is unreadable. */
-  --on-accent: #ffffff;
-  --ink-soft: #5f5f5f;
-  --muted: #8a8a8a;
+  --on-accent: #fffdf8;
+  --ink-soft: #4f6b52;
+  --muted: #87977f;
   --text: var(--ink);
   --text-soft: var(--ink-soft);
-  --line: #e7e7e7;
-  --line-strong: #d5d5d5;
+  --line: #e6d9c3;
+  --line-strong: #d2c2a4;
 
   --flame: var(--c-paprika);
-  --flame-deep: #c81400;
+  --flame-deep: #b82c22;
   --basil: var(--c-basil);
   --chilli: var(--c-tomato);
   --honey: var(--c-mango);
 
-  --grad-hot: #eb1700;
+  --grad-hot: #e03a2f;
 
   /* Backdrop behind every food illustration. */
-  --art-a: #f4f4f4;
-  --art-b: #ededed;
+  --art-a: #f2e8d5;
+  --art-b: #ebe0cb;
 
   --r-xl: 18px;
   --r-lg: 14px;

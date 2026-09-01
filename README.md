@@ -133,18 +133,21 @@ rules live in your profile where you set them once.
 
 ### The look
 
-**Clean, delivery-app red.** White ground, one hot red (#eb1700) for anything
-you can act on, near-black text, hairline gray dividers, soft shadows.
-Inspired by the delivery-app look, not copying it: no borrowed logo, wordmark
-or brand asset appears anywhere.
+**Rainforest palette, flat.** Warm cream ground, scarlet for anything you can
+act on, deep-forest ink, hairline sand dividers, soft shadows. The colours are
+taken from a flat rainforest illustration: scarlet macaw red, the macaw wing's
+steel blue, canopy greens, toucan amber, and that peach-to-cream sky as the
+page ground.
+
+Ink is a near-black *green* rather than a grey. On a cream page a true neutral
+reads cold against that much warmth.
 
 This replaced a maximalist version - a seven-stop radial-gradient ground under
 a dot screen, chunky ink outlines, hard offset shadows, a different colour for
 every option. It was fun and it was wrong, for one reason: **a photograph of
 dinner competes badly with a gradient.** Once the dishes became real
 photography the background had to get out of the way. Every gradient in the
-sheet is gone.
-
+sheet is gone and the palette swap kept it that way.
 **One accent, used to mean something.** Colour per option used to say "this is
 option three"; now it says "you picked this". Red is reserved for the primary
 action, the top pick, and the match bars. Chips and tiles are neutral.
