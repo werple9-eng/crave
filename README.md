@@ -133,21 +133,37 @@ rules live in your profile where you set them once.
 
 ### The look
 
-**Rainforest palette, flat.** Warm cream ground, scarlet for anything you can
-act on, deep-forest ink, hairline sand dividers, soft shadows. The colours are
-taken from a flat rainforest illustration: scarlet macaw red, the macaw wing's
-steel blue, canopy greens, toucan amber, and that peach-to-cream sky as the
-page ground.
+**The background is an illustrated rainforest** (`components/Jungle.tsx`), a
+flat SVG drawn once and never animated - an animated background here once took
+the whole app to about one frame per second.
 
-Ink is a near-black *green* rather than a grey. On a cream page a true neutral
-reads cold against that much warmth.
+The composition is doing a job, not just decoration. Depth runs light at the
+top and dark at the edges, because every screen puts its headline near the top
+and its cards lower down: **headlines land on open sky** where deep-green text
+still reads, and the dense canopy sits behind opaque cards where it cannot hurt
+legibility. Keep that arrangement if you redraw it.
 
-This replaced a maximalist version - a seven-stop radial-gradient ground under
-a dot screen, chunky ink outlines, hard offset shadows, a different colour for
-every option. It was fun and it was wrong, for one reason: **a photograph of
-dinner competes badly with a gradient.** Once the dishes became real
-photography the background had to get out of the way. Every gradient in the
-sheet is gone and the palette swap kept it that way.
+Two things that went wrong drawing it, both only visible on screen:
+
+- **Layers need to overlap.** A canopy band that stopped short of the one below
+  left a stripe of sky showing through the middle of the jungle.
+- **Wide shapes read as cutouts once cropped.** The river started as a filled
+  slab; on a phone the viewport crops straight to the middle of it and it looked
+  like a stray piece of paper. It is a tapering stroke now.
+
+`preserveAspectRatio="xMidYMid slice"` means the middle of the scene is what
+survives a crop, so the sky band has to stay tall enough to cover a short
+landscape viewport.
+
+**Palette.** Scarlet macaw red for anything you can act on, deep-forest ink,
+canopy greens, toucan amber, the macaw wing's steel blue, sky cream for cards
+and the page ground. Ink is a near-black *green* rather than a grey - on this
+much warmth a true neutral reads cold.
+
+The sky is the one gradient left in the sheet, and it is deliberate. Everything
+else is flat, including the shapes behind food photography, because **a photo of
+dinner competes badly with a gradient** - which is what killed the previous
+seven-stop version.
 **One accent, used to mean something.** Colour per option used to say "this is
 option three"; now it says "you picked this". Red is reserved for the primary
 action, the top pick, and the match bars. Chips and tiles are neutral.

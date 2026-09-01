@@ -2,11 +2,6 @@ import type { ReactNode } from 'react'
 import type { Food } from '../types'
 import { IconBack, IconCheck } from './icons'
 
-/** Static background wash, rendered once behind every screen. */
-export function Ambient() {
-  return <div className="ambient" aria-hidden="true" />
-}
-
 const CUISINE_LABEL: Record<string, string> = {
   'middle-eastern': 'Middle Eastern',
   'bbq': 'BBQ',

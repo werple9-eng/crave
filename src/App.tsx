@@ -14,7 +14,7 @@ import {
   saveHistory, setDietary,
 } from './storage/history'
 import type { History } from './storage/history'
-import { Ambient } from './components/ui'
+import { Jungle } from './components/Jungle'
 import { HomeScreen } from './screens/HomeScreen'
 import { QuestionsScreen } from './screens/QuestionsScreen'
 import { SwipeScreen } from './screens/SwipeScreen'
@@ -204,7 +204,7 @@ export default function App() {
   if (import.meta.env.DEV && typeof location !== 'undefined' && location.hash === '#gallery') {
     return (
       <>
-        <Ambient />
+        <Jungle />
         <ArtGallery />
       </>
     )
@@ -212,7 +212,7 @@ export default function App() {
 
   return (
     <>
-      <Ambient />
+      <Jungle />
       {screen()}
     </>
   )
