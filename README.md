@@ -133,105 +133,73 @@ rules live in your profile where you set them once.
 
 ### The look
 
-**Maximalist, delivery-app red.** A saturated multi-color ground under a dot
-screen, chunky ink outlines on everything, hard offset shadows, and a different
-color for every option in a list. Buttons travel *into* their own shadow when
-pressed. The palette is anchored on a hot red (#eb1700) over clean white cards,
-taking its cue from food-delivery apps — inspired by that look, not copying it:
-no borrowed logo, wordmark or brand asset appears anywhere.
+**Clean, delivery-app red.** White ground, one hot red (#eb1700) for anything
+you can act on, near-black text, hairline gray dividers, soft shadows.
+Inspired by the delivery-app look, not copying it: no borrowed logo, wordmark
+or brand asset appears anywhere.
 
+This replaced a maximalist version - a seven-stop radial-gradient ground under
+a dot screen, chunky ink outlines, hard offset shadows, a different colour for
+every option. It was fun and it was wrong, for one reason: **a photograph of
+dinner competes badly with a gradient.** Once the dishes became real
+photography the background had to get out of the way. Every gradient in the
+sheet is gone.
 
-The theme needs three tokens, not one, because they do not move together:
+**One accent, used to mean something.** Colour per option used to say "this is
+option three"; now it says "you picked this". Red is reserved for the primary
+action, the top pick, and the match bars. Chips and tiles are neutral.
 
-| token | is | in dark |
-| --- | --- | --- |
-| `--ink` | text *and* the chunky outline | flips to cream |
-| `--shadow-ink` | the hard offset shadow | stays dark — it has to be darker than the card or the shadow vanishes |
-| `--on-accent` | text sitting on a pastel fill | **unchanged** — a cream label on a pastel chip is unreadable |
-
-That last one is the trap: most color on this page sits on a pastel, so if
-text just inherits `--ink` it becomes invisible the moment the theme flips.
-
-**Still built around appetite.** Warm hues — watermelon, papaya, mango, custard —
-carry roughly two thirds of the surface area and always own the primary
-actions. Lime, mint, berry and grape are pops, not the base. Cool blues and
-grays stay out of it: they read clinical and are famously appetite-suppressing.
-Outlines are a very dark warm brown (`--ink`), never black.
-
+**Watch `--on-accent` when you retune the palette.** It flipped to white for the
+red primary, which silently left white text on six pale fills - the step chip,
+the tags, the match number, the stat tiles. Invisible, and nothing catches it
+but looking.
 **Emoji on the option pickers**, drawn icons everywhere else. Emoji are big,
 instantly readable and carry their own color, which is exactly what a
 maximalist picker wants; the chrome (back, undo, heart, trash) stays on the
 drawn 24px icon set so it holds up small and inherits `currentColor`.
 
-**Pictures.** Three tiers, best first: 87 dishes have a vendored CC0 studio
-photograph in `src/assets/food/`, 192 keep a Wikimedia Commons photo, and the
-remaining 33 are drawn. `FoodArt` also falls back to the drawing when an image
-fails to load, so a card is never empty.
+**Pictures.** 97 dishes have a photograph. Every one is CC0 studio work from
+StockSnap or Rawpixel - professional stock photography, free for any use, no
+attribution required. The other 217 are drawn.
 
-The Commons-only version had a problem no filter could fix. These all matched
-the dish name on every significant word and were still wrong:
+Wikimedia Commons used to cover the long tail and no longer does. It is a
+volunteer archive: the photography is amateur, often badly lit or badly
+framed, and a bad photograph of food reads as *broken* in a way a drawing
+never does. Dropping it cost about 190 photos and the app looks better for it.
+
+That is the whole trade, stated plainly: professional-only means a lot of
+illustrations. CC0 stock has endless pizza and pancakes and nothing at all for
+Tteokbokki, Bouillabaisse or Matzo Ball Soup.
+
+**No filter catches a wrong photo. Only looking does.** Every candidate that
+has ever passed a word-match check and still been wrong:
 
 | Dish | What the photo actually showed |
 | --- | --- |
-| Khao Soi | Vogel's pit viper, at the Khao Soi Dao Wildlife Sanctuary |
+| Corn Dog | a pencil drawing of a dog - it matched *corn* from the artist Cornelis |
+| Khao Soi | a pit viper, from the Khao Soi Dao Wildlife Sanctuary |
 | Apple Pie | an album cover - a portrait of the musician Kelly Lee Owens |
-| Kofta Kebab | a lamb in a field, from the geograph.org.uk survey |
-| Korean BBQ | a restaurant building and its car park |
-| Smashburger | a storefront |
-| Hot Chocolate | people at a party |
-| Cold Brew | the Oji brewing apparatus |
-| Beignets | a beignet-making machine |
+| Fish Pie | an illustration of a starfish |
+| Ice Cream | a van parked in a foggy field |
+| Poutine | a glass of beer |
+| Buddha Bowl | a carved stone relief |
+| Kofta Kebab | a lamb standing in a field |
 
-Word overlap proves the subject is *named*, not that it is food. Neither does
-the metadata: Openverse reports `category: photograph` for a William Blake
-engraving. The only check that worked was rendering every image to a contact
-sheet and looking at it, which is what `_sheet.html` in the scratch scripts is
-for. 19 Commons photos and 15 stock picks were removed that way.
+Openverse reports `category: photograph` for a William Blake engraving, so the
+metadata cannot be trusted either. The only check that works is rendering the
+whole set to a contact sheet and looking at it. 15 picks were removed that way
+on the last pass alone.
 
-So the source matters more than the filter. StockSnap and Rawpixel are CC0 and
-their food photography is studio-lit, which is why they are tier one - though
-Rawpixel also hosts digitized museum artwork, so its results still need eyes.
-Coverage is the trade: CC0 stock has plenty of pizza and pancakes and nothing
-at all for Tteokbokki or Bouillabaisse, which is why Commons still carries the
-long tail.
+**Crops are chosen by the subject, not the centre of the frame.** A centre crop
+cuts the food out of any tall or off-centre shot, which is what made some
+dishes look like they had wandered out of frame. `sharp`'s attention strategy
+crops toward the region with the most detail, which in a food photo is the food.
 
-Stock photos are vendored rather than hotlinked. Each CDN serves exactly one
-rendition - 40KB to 460KB, no smaller variant, and StockSnap 404s every width
-but 960w - while a card only ever shows about 400px. Resizing locally with
-`sharp` turns a 22MB dependency on someone else's bandwidth into 2.4MB we own.
-They go in `src/assets/` so Vite hashes them and rewrites the `/crave/` base
-path. Commons photos are still hotlinked, and attribution for them lives in
-`photoCredits.ts`, imported on demand so it stays out of the initial bundle.
-
-Two things worth knowing if you regenerate them. Openverse allows 200
-anonymous requests a day, so `stock.js` paces itself and saves state as it
-goes. And filtering by `category=photograph` returns *zero* results for
-gnocchi - most records simply have no category - so it filters on the title
-instead.
-**Vessels have a specific draw order**, and getting it wrong is what made the
-first version look broken — food was drawn as a dome *on top of* the bowl with
-the rim ellipse slicing through it:
-
-1. vessel body
-2. the opening, filled dark (the inside, in shadow)
-3. the full rim ring — this is the *back* rim
-4. contents, clipped to (opening ∪ a shallow dome), so food can mound up past
-   the rim without ever spilling out sideways
-5. the *front* half of the rim only, drawn over the contents
-6. gloss and foot
-
-One more trap: stroke the vessel outline with a path that **excludes the flat
-top edge**. Stroking the full body path after the contents draws that top edge
-straight across the food as a stray line.
-
-Food colors are contrast-checked: any `art.base` above 0.86 luminance vanishes
-against the pale card, so those get pushed down toward a warm tan.
-
-**Icons** are one family on a 24px grid with a 1.85 stroke, all inheriting
-`currentColor` — never hardcode a color in `icons.tsx`. They are drawn from
-what the real object looks like: a flame is a teardrop with a cooler inner
-core, a fork has tines and a collar, a leaf has an off-center midrib.
-
+Photos are vendored and resized rather than hotlinked: each CDN serves exactly
+one rendition, 40KB to 460KB, and StockSnap 404s every width but 960w, while a
+card only ever shows about 400px. Resizing locally turns a 22MB dependency on
+someone else's bandwidth into 2.6MB we own. They live in `src/assets/` so Vite
+hashes them and rewrites the `/crave/` base path.
 ### Motion
 
 Animate `transform` and `opacity`. Those are the two properties the compositor

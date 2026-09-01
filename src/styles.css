@@ -1,19 +1,15 @@
 /* ------------------------------------------------------------------ *
- * Crave — maximalist, delivery-app red
+ * Crave — clean delivery-app look
  *
- * Loud on purpose: a saturated multi-color ground, chunky ink outlines,
- * hard offset shadows, and a different color for every option.
+ * White ground, one hot red for anything you can act on, near-black text,
+ * hairline gray dividers, soft shadows. The food is the only loud thing on
+ * the page, which is the whole idea: a photo of dinner competes badly with
+ * a seven-stop gradient behind it.
  *
- * The palette takes its cue from food-delivery apps — a hot red
- * (#eb1700) as the hero on clean white cards. Inspired by that look, not
- * copying it: no borrowed logo, wordmark or brand asset appears anywhere.
+ * Inspired by the delivery-app look, not copying it: no borrowed logo,
+ * wordmark or brand asset appears anywhere.
  *
- * Still built around appetite. Red, tangerine, mango and butter carry the
- * surface area and always own the primary actions; lime, mint, berry and
- * grape are pops, not the base. Cool blues and grays stay out of it — they
- * read clinical and suppress appetite.
- *
- * Two rules survive from the quieter version, both learned the hard way:
+ * Two rules survive from every earlier version, both learned the hard way:
  *   - only `transform` and `opacity` are ever animated (see README)
  *   - no `animation-fill-mode: both`, no `animation-delay` on content
  * ------------------------------------------------------------------ */
@@ -23,59 +19,59 @@
    * color rather than as washed-out gray. Every one of these carries dark
    * text and a dark outline, which is what keeps a pastel set from going
    * weak. Warm hues still own the primary actions. */
-  --c-tomato: #f2685c;
-  --c-paprika: #dd5346;
-  --c-tangerine: #fa9256;
-  --c-mango: #fbbc55;
-  --c-butter: #f9de7d;
-  --c-lime: #a9d268;
-  --c-basil: #57bd8a;
-  --c-mint: #5fc9c9;
-  --c-berry: #ef7fa6;
-  --c-grape: #a98bea;
+  --c-tomato: #eb1700;
+  --c-paprika: #c81400;
+  --c-tangerine: #ff6d3f;
+  --c-mango: #ff9f1c;
+  --c-butter: #ffd166;
+  --c-lime: #3d9b52;
+  --c-basil: #2f8a52;
+  --c-mint: #0f9b8e;
+  --c-berry: #d6336c;
+  --c-grape: #7048e8;
 
   /* ground */
-  --bg: #fffaf4;
-  --bg-deep: #ffeadb;
+  --bg: #ffffff;
+  --bg-deep: #f7f7f7;
   --surface: #ffffff;
-  --surface-warm: #fff6ec;
+  --surface-warm: #f7f7f7;
 
   /* Ink does double duty as text *and* as the chunky outline, so it flips
    * with the theme. The hard shadow needs its own token: in dark mode the
    * outline goes light while the shadow has to stay darker than the card. */
-  --ink: #191207;
-  --shadow-ink: #191207;
+  --ink: #191919;
+  --shadow-ink: rgba(0, 0, 0, 0.10);
   /* Text sitting ON a pastel fill. Stays dark in BOTH themes - a cream
    * label on a pastel chip is unreadable. */
-  --on-accent: #1b1510;
-  --ink-soft: #5c4433;
-  --muted: #8c7565;
+  --on-accent: #ffffff;
+  --ink-soft: #5f5f5f;
+  --muted: #8a8a8a;
   --text: var(--ink);
   --text-soft: var(--ink-soft);
-  --line: var(--ink);
-  --line-strong: var(--ink);
+  --line: #e7e7e7;
+  --line-strong: #d5d5d5;
 
   --flame: var(--c-paprika);
-  --flame-deep: #c2543f;
+  --flame-deep: #c81400;
   --basil: var(--c-basil);
   --chilli: var(--c-tomato);
   --honey: var(--c-mango);
 
-  --grad-hot: linear-gradient(135deg, #fbbc55 0%, #fa9256 45%, #f2685c 100%);
+  --grad-hot: #eb1700;
 
   /* Backdrop behind every food illustration. */
-  --art-a: var(--c-mango);
-  --art-b: var(--c-butter);
+  --art-a: #f4f4f4;
+  --art-b: #ededed;
 
-  --r-xl: 28px;
-  --r-lg: 22px;
-  --r-md: 16px;
-  --r-sm: 12px;
+  --r-xl: 18px;
+  --r-lg: 14px;
+  --r-md: 12px;
+  --r-sm: 8px;
 
   /* hard offset shadows: the single most maximalist thing in the sheet */
-  --pop-sm: 3px 3px 0 var(--shadow-ink);
-  --pop: 5px 5px 0 var(--shadow-ink);
-  --pop-lg: 8px 8px 0 var(--shadow-ink);
+  --pop-sm: 0 1px 2px rgba(0, 0, 0, 0.07);
+  --pop: 0 2px 6px rgba(0, 0, 0, 0.09);
+  --pop-lg: 0 6px 20px rgba(0, 0, 0, 0.12);
 
   --spring: cubic-bezier(0.34, 1.42, 0.5, 1);
   --out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -110,25 +106,9 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background:
-    radial-gradient(44% 30% at 2% 0%, rgba(255, 157, 139, 0.72), rgba(255, 157, 139, 0) 70%),
-    radial-gradient(38% 28% at 98% 4%, rgba(255, 185, 146, 0.70), rgba(255, 185, 146, 0) 68%),
-    radial-gradient(32% 24% at 84% 32%, rgba(255, 180, 207, 0.55), rgba(255, 180, 207, 0) 70%),
-    radial-gradient(38% 28% at 8% 44%, rgba(255, 211, 154, 0.68), rgba(255, 211, 154, 0) 70%),
-    radial-gradient(32% 22% at 94% 72%, rgba(207, 232, 160, 0.58), rgba(207, 232, 160, 0) 70%),
-    radial-gradient(46% 32% at 24% 100%, rgba(255, 234, 168, 0.72), rgba(255, 234, 168, 0) 72%),
-    radial-gradient(30% 20% at 62% 60%, rgba(165, 229, 213, 0.46), rgba(165, 229, 213, 0) 72%);
+  background: var(--bg);
 }
 
-/* Dot screen over the gradients, so the ground has texture up close. */
-.ambient::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(25, 18, 7, 0.10) 1.6px, transparent 1.7px);
-  background-size: 16px 16px;
-  opacity: 0.55;
-}
 
 /* ---------------------------- layout ----------------------------- */
 
@@ -158,15 +138,15 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 .topbar .spacer { flex: 1; }
 
 .steplabel {
-  color: var(--on-accent);
+  color: var(--ink);
   font-size: 12.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink);
   font-weight: 750;
   font-variant-numeric: tabular-nums;
-  background: var(--c-butter);
-  border: 2.5px solid var(--ink);
+  background: var(--surface-warm);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 5px 12px;
   box-shadow: var(--pop-sm);
@@ -196,7 +176,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
 
 .btn {
   position: relative;
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-md);
   padding: 17px 22px;
   font-size: 17px;
@@ -212,13 +192,13 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   will-change: transform;
 }
 /* press = travel into your own shadow */
-.btn:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
+.btn:active { transform: translate3d(4px, 4px, 0); box-shadow: var(--pop-sm); }
 .btn:disabled { opacity: 0.45; cursor: default; transform: none; }
 
 /* Ink on pastel, not white: white text on a pastel fill fails contrast. */
 .btn-primary { background: var(--grad-hot); color: var(--on-accent); }
-.btn-ghost { background: var(--c-butter); color: var(--on-accent); }
-.btn-ghost:hover { background: var(--c-mango); }
+.btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--surface-warm); }
 
 .btn-text {
   background: none;
@@ -235,7 +215,7 @@ button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-c
   text-decoration: underline;
   text-decoration-thickness: 2.5px;
   text-underline-offset: 3px;
-  text-decoration-color: var(--c-mango);
+  text-decoration-color: var(--c-tomato);
   transition: color 0.16s ease, transform 0.2s var(--spring);
 }
 .btn-text:hover { color: var(--flame-deep); text-decoration-color: var(--c-tomato); }
@@ -245,7 +225,7 @@ a.btn { text-decoration: none; }
 
 .iconbtn {
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 999px;
   width: 44px;
   height: 44px;
@@ -255,8 +235,8 @@ a.btn { text-decoration: none; }
   box-shadow: var(--pop-sm);
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring), background 0.16s ease;
 }
-.iconbtn:hover { background: var(--c-butter); }
-.iconbtn:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--shadow-ink); }
+.iconbtn:hover { background: var(--surface-warm); }
+.iconbtn:active { transform: translate3d(0, 1px, 0); box-shadow: none; }
 .iconbtn:disabled { opacity: 0.4; cursor: default; transform: none; }
 
 /* ------------------------- option cards -------------------------- */
@@ -268,7 +248,7 @@ a.btn { text-decoration: none; }
  * first slots because those are the most-picked answers.
  */
 .option {
-  --oc: var(--c-mango);
+  --oc: var(--c-tomato);
   position: relative;
   display: flex;
   align-items: center;
@@ -276,7 +256,7 @@ a.btn { text-decoration: none; }
   width: 100%;
   text-align: left;
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 14px 16px;
   box-shadow: var(--pop);
@@ -284,43 +264,43 @@ a.btn { text-decoration: none; }
   animation: optionIn 0.34s var(--out);
   will-change: transform;
 }
-.option:nth-child(1) { --oc: var(--c-tomato); }
-.option:nth-child(2) { --oc: var(--c-tangerine); }
-.option:nth-child(3) { --oc: var(--c-butter); }
-.option:nth-child(4) { --oc: var(--c-lime); }
-.option:nth-child(5) { --oc: var(--c-berry); }
+/* One accent for every option: the colour now means "you picked this",
+ * not "this is option three". */
 
 @keyframes optionIn { from { opacity: 0; transform: translate3d(0, 14px, 0); } }
-.option:hover { transform: translate3d(-2px, -2px, 0); box-shadow: 7px 7px 0 var(--shadow-ink); }
-.option:active { transform: translate3d(3px, 3px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
-.option.selected { background: var(--oc); color: var(--on-accent); }
+.option:hover { transform: translate3d(0, -2px, 0); box-shadow: var(--pop); }
+.option:active { transform: translate3d(0, 1px, 0) scale(0.995); box-shadow: var(--pop-sm); }
+.option.selected {
+  border-color: var(--oc);
+  box-shadow: inset 0 0 0 1px var(--oc), var(--pop);
+}
 
 .option .oicon {
   width: 52px;
   height: 52px;
   flex-shrink: 0;
-  border-radius: 14px;
-  border: 2.5px solid var(--ink);
-  background: var(--oc);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface-warm);
   display: grid;
   place-items: center;
   font-size: 27px;
   line-height: 1;
-  box-shadow: 2px 2px 0 var(--shadow-ink);
+  box-shadow: var(--pop);
   transition: transform 0.28s var(--spring);
 }
-.option:hover .oicon { transform: rotate(-9deg) scale(1.08); }
-.option.selected .oicon { background: var(--surface); transform: rotate(6deg) scale(1.1); }
+.option:hover .oicon { transform: scale(1.04); }
+.option.selected .oicon { background: var(--surface-warm); transform: scale(1.06); }
 .option .olabel { display: block; font-size: 17.5px; font-weight: 700; letter-spacing: -0.005em; }
 .option .ohint { display: block; font-size: 13.5px; color: var(--ink-soft); font-weight: 550; margin-top: 1px; }
-.option.selected .ohint { color: rgba(27, 21, 16, 0.72); }
+.option.selected .ohint { color: var(--ink-soft); }
 .option .otick {
   margin-left: auto;
   flex-shrink: 0;
   width: 28px;
   height: 28px;
   border-radius: 999px;
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   background: var(--surface);
   color: var(--ink);
   display: grid;
@@ -338,7 +318,7 @@ a.btn { text-decoration: none; }
   height: 10px;
   flex: 1;
   border-radius: 999px;
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   background: var(--surface);
   transform-origin: center;
   transition: background 0.3s var(--out), transform 0.34s var(--spring);
@@ -351,7 +331,7 @@ a.btn { text-decoration: none; }
    * empty progress bar read as a full one. */
   height: 16px;
   background: var(--surface);
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 999px;
   overflow: hidden;
   margin: 4px 0 16px;
@@ -378,7 +358,7 @@ a.btn { text-decoration: none; }
   position: absolute;
   inset: 0;
   background: var(--surface);
-  border: 3.5px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-xl);
   box-shadow: var(--pop-lg);
   overflow: hidden;
@@ -401,14 +381,8 @@ a.btn { text-decoration: none; }
   display: grid;
   place-items: center;
   padding: 14px;
-  border-bottom: 3.5px solid var(--ink);
-  background:
-    radial-gradient(120% 84% at 50% 4%, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0) 62%),
-    repeating-linear-gradient(
-      -45deg,
-      var(--art-a) 0 22px,
-      var(--art-b) 22px 44px
-    );
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-warm);
 }
 .food-art svg { width: 100%; height: 100%; max-height: 330px; }
 
@@ -438,19 +412,19 @@ a.btn { text-decoration: none; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
 .tag {
-  color: var(--on-accent);
+  color: var(--ink-soft);
   font-size: 12px;
   font-weight: 750;
   padding: 5px 11px;
   border-radius: 999px;
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   color: var(--ink);
-  box-shadow: 2px 2px 0 var(--shadow-ink);
+  box-shadow: var(--pop);
 }
-.tag:nth-child(1) { background: var(--c-tangerine); }
-.tag:nth-child(2) { background: var(--c-butter); }
-.tag:nth-child(3) { background: var(--c-lime); }
-.tag:nth-child(4) { background: var(--c-mint); }
+.tag:nth-child(1) { background: var(--surface-warm); }
+.tag:nth-child(2) { background: var(--surface-warm); }
+.tag:nth-child(3) { background: var(--surface-warm); }
+.tag:nth-child(4) { background: var(--surface-warm); }
 
 .stamp {
   position: absolute;
@@ -460,7 +434,7 @@ a.btn { text-decoration: none; }
   letter-spacing: 0.08em;
   padding: 9px 15px;
   border-radius: var(--r-sm);
-  border: 4px solid var(--ink);
+  border: 1px solid var(--line);
   box-shadow: var(--pop-sm);
   pointer-events: none;
   z-index: 2;
@@ -471,7 +445,7 @@ a.btn { text-decoration: none; }
 
 .controls { display: flex; gap: 11px; }
 .ctrl {
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   background: var(--surface);
   border-radius: var(--r-md);
   height: 70px;
@@ -486,23 +460,23 @@ a.btn { text-decoration: none; }
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring), background 0.16s ease;
   will-change: transform;
 }
-.ctrl:active { transform: translate3d(4px, 4px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
-.ctrl.no { background: #ffe6e0; color: var(--on-accent); }
-.ctrl.no:hover { background: var(--c-tomato); }
-.ctrl.yes { background: #eaf6d8; color: var(--on-accent); }
-.ctrl.yes:hover { background: var(--c-lime); }
+.ctrl:active { transform: translate3d(0, 1px, 0) scale(0.99); box-shadow: var(--pop-sm); }
+.ctrl.no { background: var(--surface); color: var(--c-paprika); border-color: #f3c8c0; }
+.ctrl.no:hover { background: #fff1ee; border-color: var(--c-tomato); }
+.ctrl.yes { background: var(--surface); color: var(--c-basil); border-color: #c4e2ce; }
+.ctrl.yes:hover { background: #f0f9f2; border-color: var(--c-basil); }
 
 .ctrl.wide {
-  color: var(--on-accent);
+  color: var(--ink);
   width: 100%;
   height: 54px;
   grid-auto-flow: column;
   align-content: center;
   gap: 9px;
   font-size: 15px;
-  background: var(--c-butter);
+  background: var(--surface-warm);
 }
-.ctrl.wide:hover { background: var(--c-mango); }
+.ctrl.wide:hover { background: var(--surface-warm); }
 
 /* --------------------------- results ----------------------------- */
 
@@ -513,7 +487,7 @@ a.btn { text-decoration: none; }
   display: flex;
   gap: 14px;
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 15px;
   width: 100%;
@@ -525,12 +499,11 @@ a.btn { text-decoration: none; }
   will-change: transform;
 }
 @keyframes resultIn { from { opacity: 0; transform: translate3d(0, 26px, 0) scale(0.95); } }
-.result:hover { transform: translate3d(-2px, -2px, 0); box-shadow: 7px 7px 0 var(--shadow-ink); }
-.result:active { transform: translate3d(3px, 3px, 0); box-shadow: 1px 1px 0 var(--shadow-ink); }
+.result:hover { transform: translate3d(0, -2px, 0); box-shadow: var(--pop); }
+.result:active { transform: translate3d(0, 1px, 0) scale(0.995); box-shadow: var(--pop-sm); }
 
 .result.top {
-  background: linear-gradient(150deg, #fff6d9 0%, var(--surface) 60%);
-  border-width: 4px;
+  border-color: var(--c-tomato);
   box-shadow: var(--pop-lg);
 }
 
@@ -539,8 +512,8 @@ a.btn { text-decoration: none; }
   height: 70px;
   flex-shrink: 0;
   border-radius: var(--r-sm);
-  border: 3px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--art-a) 0 12px, var(--art-b) 12px 24px);
+  border: 1px solid var(--line);
+  background: var(--surface-warm);
   display: grid;
   place-items: center;
   box-shadow: 2.5px 2.5px 0 var(--shadow-ink);
@@ -555,7 +528,7 @@ a.btn { text-decoration: none; }
 .matchrow { display: flex; align-items: center; gap: 9px; margin-top: 10px; }
 .matchbar {
   flex: 1; height: 12px; background: var(--surface);
-  border: 2.5px solid var(--ink); border-radius: 999px; overflow: hidden;
+  border: 1px solid var(--line); border-radius: 999px; overflow: hidden;
 }
 .matchbar > i {
   display: block; height: 100%; width: 100%;
@@ -563,10 +536,10 @@ a.btn { text-decoration: none; }
   transform-origin: left center;
 }
 .matchnum {
-  color: var(--on-accent);
+  color: var(--ink);
   font-size: 12.5px; font-weight: 750; color: var(--ink);
   font-variant-numeric: tabular-nums;
-  background: var(--c-butter); border: 2.5px solid var(--ink);
+  background: var(--surface-warm); border: 1px solid var(--line);
   border-radius: 999px; padding: 2px 9px;
 }
 
@@ -582,7 +555,7 @@ a.btn { text-decoration: none; }
   top: 12px;
   right: 13px;
   background: var(--surface);
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   color: var(--ink);
   font-size: 12.5px;
   font-weight: 750;
@@ -591,7 +564,7 @@ a.btn { text-decoration: none; }
   border-radius: 999px;
   display: grid;
   place-items: center;
-  box-shadow: 2px 2px 0 var(--shadow-ink);
+  box-shadow: var(--pop);
 }
 .result.top .rank { background: var(--c-tomato); color: var(--on-accent); }
 
@@ -611,7 +584,7 @@ a.btn { text-decoration: none; }
 
 .modal {
   background: var(--surface);
-  border: 4px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 30px;
   padding: 10px 20px 20px;
   width: 100%;
@@ -624,8 +597,8 @@ a.btn { text-decoration: none; }
 
 .modal .mart {
   width: 168px; height: 168px; margin: 4px auto 0;
-  border-radius: 22px; border: 3px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--art-a) 0 18px, var(--art-b) 18px 36px);
+  border-radius: 22px; border: 1px solid var(--line);
+  background: var(--surface-warm);
   box-shadow: var(--pop-sm);
 }
 .modal .mlabel {
@@ -647,7 +620,7 @@ a.btn { text-decoration: none; }
   top: -16px;
   width: 10px;
   height: 16px;
-  border: 2px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 2px;
   will-change: transform;
   animation: fall 2s cubic-bezier(0.3, 0.6, 0.6, 1) forwards;
@@ -662,19 +635,19 @@ a.btn { text-decoration: none; }
 .statgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
 .stat {
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-lg);
   padding: 15px;
   box-shadow: var(--pop);
 }
-.stat:nth-child(1) { background: var(--c-butter); }
-.stat:nth-child(2) { background: var(--c-mint); }
+.stat:nth-child(1) { background: var(--surface-warm); }
+.stat:nth-child(2) { background: var(--surface-warm); }
 .stat .snum {
-  color: var(--on-accent);
+  color: var(--ink);
   font-size: 34px; font-weight: 750; letter-spacing: -0.018em;
   color: var(--ink); font-variant-numeric: tabular-nums;
 }
-.stat .slabel { font-size: 13px; color: var(--on-accent); font-weight: 700; margin-top: 2px; line-height: 1.25; }
+.stat .slabel { font-size: 13px; color: var(--ink-soft); font-weight: 700; margin-top: 2px; line-height: 1.25; }
 
 .rows { display: grid; gap: 10px; margin-bottom: 22px; }
 .row {
@@ -683,7 +656,7 @@ a.btn { text-decoration: none; }
   justify-content: space-between;
   gap: 12px;
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
   padding: 11px 14px;
   box-shadow: var(--pop-sm);
@@ -704,14 +677,14 @@ a.btn { text-decoration: none; }
 }
 .row .remoji {
   width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px;
-  border: 2.5px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--art-a) 0 10px, var(--art-b) 10px 20px);
+  border: 1px solid var(--line);
+  background: var(--surface-warm);
   display: grid; place-items: center;
 }
 .row .remoji svg { width: 100%; height: 100%; }
 
 .sectiontitle {
-  color: var(--on-accent);
+  color: var(--ink-soft);
   display: inline-block;
   font-size: 12px;
   letter-spacing: 0.1em;
@@ -720,7 +693,7 @@ a.btn { text-decoration: none; }
   font-weight: 750;
   margin: 8px 0 12px;
   background: var(--c-lime);
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 5px 12px;
   box-shadow: var(--pop-sm);
@@ -743,7 +716,7 @@ a.btn { text-decoration: none; }
   align-items: center;
   gap: 8px;
   background: var(--surface);
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 9px 15px;
   font-size: 15px;
@@ -752,7 +725,7 @@ a.btn { text-decoration: none; }
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring), background 0.16s ease;
   will-change: transform;
 }
-.chip:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--shadow-ink); }
+.chip:active { transform: translate3d(0, 1px, 0); box-shadow: none; }
 .chip.on { background: var(--c-tomato); color: var(--on-accent); }
 
 /* ----------------------------- home ------------------------------ */
@@ -761,8 +734,8 @@ a.btn { text-decoration: none; }
 .hero .logo {
   width: 156px; height: 156px; margin: 0 auto 4px;
   border-radius: 30px;
-  border: 3.5px solid var(--ink);
-  background: repeating-linear-gradient(-45deg, var(--art-a) 0 20px, var(--art-b) 20px 40px);
+  border: 1px solid var(--line);
+  background: var(--surface-warm);
   box-shadow: var(--pop);
   animation: float 5.5s ease-in-out infinite;
   will-change: transform;
@@ -791,19 +764,19 @@ a.btn { text-decoration: none; }
 .dietline {
   color: var(--on-accent);
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--c-mint); border: 3px solid var(--ink);
+  background: var(--surface-warm); border: 1px solid var(--line);
   border-radius: 999px; padding: 9px 16px; font-size: 13.5px;
   font-weight: 700; color: var(--ink); margin: 14px auto 0;
   box-shadow: var(--pop-sm);
   transition: transform 0.18s var(--spring), box-shadow 0.18s var(--spring);
 }
-.dietline:active { transform: translate3d(2px, 2px, 0); box-shadow: 0 0 0 var(--shadow-ink); }
+.dietline:active { transform: translate3d(0, 1px, 0); box-shadow: none; }
 
 .streak {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 13.5px; font-weight: 750;
-  background: var(--c-berry); color: var(--on-accent);
-  border: 3px solid var(--ink);
+  background: var(--surface-warm); color: var(--ink-soft);
+  border: 1px solid var(--line);
   border-radius: 999px; padding: 6px 14px;
   box-shadow: var(--pop-sm);
 }
@@ -922,8 +895,8 @@ a.btn { text-decoration: none; }
   font-weight: 750;
   letter-spacing: -0.02em;
   color: var(--on-accent);
-  background: var(--c-butter);
-  border: 2.5px solid var(--ink);
+  background: var(--c-tomato);
+  border: 0;
   border-radius: 999px;
   padding: 5px 14px;
   box-shadow: var(--pop-sm);
@@ -963,11 +936,10 @@ a.btn { text-decoration: none; }
    * flex row has not resolved one yet. align-items:stretch does it properly. */
   flex: 1;
   min-width: 0;
-  border: 3px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: 18px;
   overflow: hidden;
-  background:
-    repeating-linear-gradient(-45deg, var(--art-a) 0 14px, var(--art-b) 14px 28px);
+  background: var(--surface-warm);
   box-shadow: var(--pop);
   transform: rotate(calc((var(--i) - 1) * 3deg)) translateY(calc(var(--i) * -2px));
   animation: teaserIn 0.5s var(--spring);
@@ -997,7 +969,7 @@ a.btn { text-decoration: none; }
 .credit {
   display: block;
   background: var(--surface);
-  border: 2.5px solid var(--ink);
+  border: 1px solid var(--line);
   border-radius: var(--r-sm);
   padding: 10px 13px;
   text-decoration: none;
