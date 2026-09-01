@@ -98,20 +98,44 @@ src/
   screens/               one file per screen (plus a dev-only #gallery)
 ```
 
-### No duplicate questions
+### The questions
 
-An earlier version asked "what are you NOT feeling?" (heavy / healthy / spicy /
-sweet / hot / cold) and then immediately asked the same six things again as
-craving questions. That's fixed structurally rather than by reordering:
+**How many you get asked varies, and that's the point.** A fixed
+questionnaire is wrong in both directions: answer "starving", "not doing
+spicy" and "nothing soggy" and 314 dishes are already down to about 15, so
+three more questions are pure tax - but shrug at everything and six questions
+have told us nothing.
 
-- **Mood** lives in the questions, and only there.
-- **Standing dietary rules** (no meat / seafood / dairy / raw / fried / bread)
-  live in your profile. You set them once and they apply to every session,
-  because "I don't eat seafood" isn't a mood.
-- **Hunger** now drives both portion *and* heaviness, so the separate "how
-  heavy do you want it?" question is gone.
+So after each answer the planner scores every remaining question against what
+is *still plausible* and asks whichever one splits it best. It stops when the
+pool is small enough, when nothing left to ask would move it, or at a hard
+ceiling. In practice that lands between three and five questions.
 
-A test asserts the two sets can never overlap again.
+Two things a pure information-gain planner gets wrong, both corrected here:
+
+- **A floor and a ceiling.** One question then an answer reads as a guess even
+  when the maths says we know enough, and nobody wants nine. Three to seven.
+- **Shrugging is an answer.** If you have answered "whatever" to everything,
+  the pool is still the whole library and every remaining question still
+  scores well, so the planner would happily ask all seven. But you are telling
+  us you are not fussy, and the honest response to that is food, not another
+  question.
+
+The step label never says "3 of 8", because that would become a lie the
+moment the count changes. It counts dishes down instead - "147 still in play",
+then "down to 36" - which is the thing actually happening.
+
+**It asks what's off the table, not what's on it.** "I want something crispy"
+is a decision you mostly haven't made yet - that is why you opened the app.
+"I'm not doing anything fried right now" is one you already have. So the
+options are phrased as noes wherever a no makes sense, and the explanations on
+the results screen read back the same way.
+
+**It still never asks the same thing twice**, and never asks what cuisine you
+want. An earlier build asked "not feeling spicy?" on one screen and "do you
+want heat?" on the next, plus the same duplicate pair for hot/cold, heaviness,
+healthiness and sweetness. Mood questions live in one place; standing dietary
+rules live in your profile where you set them once.
 
 ### The look
 
@@ -122,7 +146,6 @@ pressed. The palette is anchored on a hot red (#eb1700) over clean white cards,
 taking its cue from food-delivery apps — inspired by that look, not copying it:
 no borrowed logo, wordmark or brand asset appears anywhere.
 
-**Dark mode** follows your system setting on first run, then remembers what you pick (toggle in the home top bar). It is grey, not black: pure black defeats the chunky outlines and reads harsh next to warm food colours.
 
 The theme needs three tokens, not one, because they do not move together:
 

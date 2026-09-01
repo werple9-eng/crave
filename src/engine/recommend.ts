@@ -98,7 +98,7 @@ export function scorePreferenceMatch(food: Food, prefs: PreferenceAnswers): Cont
       food.temperature === 'either' ? w * 0.4 : food.temperature === prefs.temperature ? w : -w
     out.push({
       source: 'temperature',
-      reason: prefs.temperature === 'hot' ? 'You wanted something hot' : 'You wanted something cold',
+      reason: prefs.temperature === 'hot' ? 'Nothing cold, like you said' : 'Nothing hot, like you said',
       points, max: w,
     })
   }
@@ -107,7 +107,7 @@ export function scorePreferenceMatch(food: Food, prefs: PreferenceAnswers): Cont
     const w = W.texture
     out.push({
       source: 'texture',
-      reason: prefs.texture === 'crispy' ? 'You wanted something crispy' : 'You wanted something soft and comforting',
+      reason: prefs.texture === 'crispy' ? 'Not soggy' : 'Nothing fried', 
       points: w * TEXTURE_FIT[prefs.texture][food.texture],
       max: w,
     })
@@ -120,10 +120,10 @@ export function scorePreferenceMatch(food: Food, prefs: PreferenceAnswers): Cont
     if (prefs.spice === 'none') {
       // Not a target - anything above mild should fall off fast.
       points = clamp(w * (1 - food.spiceLevel / 2), -w, w)
-      reason = 'No heat, the way you wanted'
+      reason = 'You ruled out spicy'
     } else if (prefs.spice === 'mild') {
       points = nearTarget(food.spiceLevel, 2, 2.2, w)
-      reason = 'Has a little heat'
+      reason = 'A little heat, not more'
     } else {
       points = nearTarget(food.spiceLevel, 4.5, 2.5, w)
       reason = 'Genuinely spicy'
@@ -136,7 +136,7 @@ export function scorePreferenceMatch(food: Food, prefs: PreferenceAnswers): Cont
     const healthy = prefs.indulgence === 'healthy'
     out.push({
       source: 'indulgence',
-      reason: healthy ? 'On the healthier side' : 'Satisfyingly indulgent',
+      reason: healthy ? 'Nothing heavy about it' : 'Not a salad', 
       points: healthy
         ? clamp((w * (food.healthiness - 3)) / 2, -w, w)
         : clamp((w * (3 - food.healthiness)) / 2, -w, w),
@@ -152,7 +152,7 @@ export function scorePreferenceMatch(food: Food, prefs: PreferenceAnswers): Cont
         : clamp((w * (2 - food.sweetness)) / 1.8, -w, w)
     out.push({
       source: 'sweetness',
-      reason: prefs.sweetness === 'sweet' ? 'You wanted something sweet' : 'Savoury, not sweet',
+      reason: prefs.sweetness === 'sweet' ? 'Not savoury' : 'Nothing sweet about it',
       points, max: w,
     })
   }
@@ -162,7 +162,7 @@ export function scorePreferenceMatch(food: Food, prefs: PreferenceAnswers): Cont
     const cheap = prefs.budget === 'cheap'
     out.push({
       source: 'budget',
-      reason: cheap ? 'Easy on the wallet' : 'Worth spending a bit more on',
+      reason: cheap ? 'You are not spending much' : 'Worth spending a bit more on',
       // priceLevel runs 1-4, so a two-step gap is the full swing either way.
       points: cheap
         ? clamp((w * (2.5 - food.priceLevel)) / 1.5, -w, w)

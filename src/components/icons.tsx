@@ -349,18 +349,7 @@ export const IconEither = (p: IconProps) => (
   </Icon>
 )
 
-export const IconSun = (p: IconProps) => (
-  <Icon {...p}>
-    <circle cx="12" cy="12" r="4.6" />
-    <path d="M12 2.4v2.6M12 19v2.6M4.2 4.2l1.9 1.9M17.9 17.9l1.9 1.9M2.4 12H5M19 12h2.6M4.2 19.8l1.9-1.9M17.9 6.1l1.9-1.9" />
-  </Icon>
-)
 
-export const IconMoon = (p: IconProps) => (
-  <Icon {...p}>
-    <path d="M20.4 14.2A8.8 8.8 0 0 1 9.8 3.6a8.8 8.8 0 1 0 10.6 10.6z" />
-  </Icon>
-)
 
 /* ------------------------- lookup by name ------------------------- */
 

@@ -1,61 +1,80 @@
-import { useEffect, useState } from 'react'
-import type { HungerLevel, PreferenceAnswers } from '../types'
-import { QUESTIONS } from '../data/questions'
+import { useEffect, useMemo, useState } from 'react'
+import type { HungerLevel, PreferenceAnswers, VetoId } from '../types'
+import { HUNGER_QUESTION, questionFor } from '../data/questions'
 import type { AnswerValue, QuestionKey } from '../data/questions'
-import { Option, Pips, Screen, buzz } from '../components/ui'
+import { MIN_QUESTIONS, planNext, progressFor } from '../engine/questionPlan'
+import { Option, Progress, Screen, buzz } from '../components/ui'
 import { IconForward } from '../components/icons'
 
 /**
- * The whole questionnaire, one screen.
+ * The questionnaire, one question at a time.
  *
- * This replaces three separate screens (hunger, then vetoes, then cravings)
- * that between them asked you about heat, temperature, heaviness and sweetness
- * *twice*. Now it's one pass, one tap per question, auto-advancing, and you
- * can bail out to the food at any point.
+ * How many you get is not fixed - after each answer the planner looks at
+ * what's still plausible and either picks the question that best splits it or
+ * decides we already know enough. Answer decisively and this is three
+ * questions; shrug at everything and it's up to seven.
+ *
+ * The step label deliberately never says "3 of 8", because that would be a
+ * lie the moment the count changes. It counts down dishes instead, which is
+ * the thing actually happening.
  */
 export function QuestionsScreen({
-  hunger, preferences, onAnswer, onDone, onSkip, onBack,
+  hunger, preferences, vetoes, onAnswer, onDone, onSkip, onBack,
 }: {
   hunger: HungerLevel | null
   preferences: PreferenceAnswers
+  vetoes: VetoId[]
   onAnswer: (key: QuestionKey, value: AnswerValue) => void
   onDone: () => void
   onSkip: () => void
   onBack: () => void
 }) {
-  const [index, setIndex] = useState(0)
+  /** Answered keys, in the order they were asked, so Back can retrace. */
+  const [asked, setAsked] = useState<QuestionKey[]>([])
+  const [current, setCurrent] = useState<QuestionKey>('hunger')
   const [pending, setPending] = useState<AnswerValue | null>(null)
-  /**
-   * Which questions you've actually answered.
-   *
-   * Needed because every preference defaults to `'any'`, which is also a real
-   * option ("Either works") - without this, every unanswered question renders
-   * with that option already ticked, as though you'd chosen it.
-   */
-  const [answered, setAnswered] = useState<Set<QuestionKey>>(() => new Set())
-  const question = QUESTIONS[index]
 
+  const answered = useMemo(() => new Set(asked), [asked])
+  const question = current === 'hunger' ? HUNGER_QUESTION : questionFor(current)
+
+  /** What the pool looks like *before* this question is answered. */
+  const plan = useMemo(
+    () => planNext(hunger, preferences, answered, vetoes),
+    [hunger, preferences, answered, vetoes],
+  )
+
+  const showSelection = answered.has(current)
   const currentValue: AnswerValue | null =
-    question.key === 'hunger' ? hunger : preferences[question.key]
-  const showSelection = answered.has(question.key)
+    current === 'hunger' ? hunger : preferences[current]
 
   const choose = (answer: AnswerValue) => {
     if (pending) return
     buzz(8)
     setPending(answer)
-    setAnswered((prev) => new Set(prev).add(question.key))
-    onAnswer(question.key, answer)
+    onAnswer(current, answer)
+
     // Brief pause so the selection actually registers visually.
     window.setTimeout(() => {
       setPending(null)
-      if (index + 1 >= QUESTIONS.length) onDone()
-      else setIndex(index + 1)
+      const nextAnswered = new Set(answered).add(current)
+      const nextPrefs =
+        current === 'hunger'
+          ? preferences
+          : ({ ...preferences, [current]: answer } as PreferenceAnswers)
+      const nextHunger = current === 'hunger' ? (answer as HungerLevel) : hunger
+
+      const step = planNext(nextHunger, nextPrefs, nextAnswered, vetoes)
+      setAsked((prev) => (prev.includes(current) ? prev : [...prev, current]))
+      if (step.next === null) onDone()
+      else setCurrent(step.next)
     }, 190)
   }
 
   const back = () => {
-    if (index === 0) onBack()
-    else setIndex(index - 1)
+    if (asked.length === 0) return onBack()
+    const previous = asked[asked.length - 1]
+    setAsked((prev) => prev.slice(0, -1))
+    setCurrent(previous)
   }
 
   // Number keys pick an option on desktop.
@@ -72,26 +91,40 @@ export function QuestionsScreen({
     return () => window.removeEventListener('keydown', onKey)
   })
 
+  const count = asked.length
+  const step =
+    count === 0
+      ? 'First one'
+      : plan.remaining > 40
+        ? `${plan.remaining} still in play`
+        : `Down to ${plan.remaining}`
+
   return (
     <Screen
       onBack={back}
-      step={`${index + 1} of ${QUESTIONS.length}`}
+      step={step}
       right={
-        index > 0 ? (
+        count > 0 ? (
           <button className="btn-text" style={{ width: 'auto', padding: '8px 4px' }} onClick={onSkip}>
-            Skip to food
+            Skip ahead
             <IconForward size={15} />
           </button>
         ) : undefined
       }
     >
-      <Pips total={QUESTIONS.length} current={index} />
+      <Progress value={progressFor(count, plan.remaining)} />
       <h2 className="title">{question.prompt}</h2>
-      <p className="subtitle">Go with your gut. There's no wrong answer.</p>
+      <p className="subtitle">
+        {count === 0
+          ? 'A few quick ones. Go with your gut.'
+          : count + 1 > MIN_QUESTIONS
+            ? 'Nearly there. Whatever comes to mind.'
+            : "Easier to say what you don't want."}
+      </p>
       <div className="options">
         {question.options.map((option, i) => (
           <Option
-            key={`${question.key}-${String(option.value)}`}
+            key={`${current}-${String(option.value)}`}
             emoji={option.emoji}
             label={option.label}
             hint={option.hint}

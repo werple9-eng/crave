@@ -3,11 +3,11 @@
  *
  * GENERATED FILE - do not hand-edit.
  *
- * Tier 1: 87 dishes have a vendored CC0 studio photograph in
+ * Tier 1: 89 dishes have a vendored CC0 studio photograph in
  * src/assets/food/. These come from StockSnap and Rawpixel, where every image
  * is already a food photograph, so the failure mode below cannot happen.
  *
- * Tier 2: 192 dishes keep a Wikimedia Commons photo, hotlinked.
+ * Tier 2: 191 dishes keep a Wikimedia Commons photo, hotlinked.
  *
  * Tier 3: everything else is drawn by FoodArt, which is also the fallback if
  * an image fails to load, so a card is never empty.
@@ -152,7 +152,6 @@ const REMOTE: Record<string, string> = {
   'korean-fried-chicken': "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Korean_fried_chicken_240206.jpg/960px-Korean_fried_chicken_240206.jpg",
   'korma': "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Chicken_Korma.JPG/960px-Chicken_Korma.JPG",
   'kung-pao-chicken': "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Kung_Pao_chicken_%28western_version%29_-1.jpg/960px-Kung_Pao_chicken_%28western_version%29_-1.jpg",
-  'lentil-soup': "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Homemade_Lentil_Soup_-_Lavash_2025-02-10.jpg/960px-Homemade_Lentil_Soup_-_Lavash_2025-02-10.jpg",
   'lo-mein': "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Braised_Mushroom_Lo_Mein_with_Soup_-_CK_Bistro.jpg/960px-Braised_Mushroom_Lo_Mein_with_Soup_-_CK_Bistro.jpg",
   'loaded-baked-potato': "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Loaded_Potato_Cake_with_Mushrooms_%26_baked_beans_-_No.16_2024-03-04.jpg/960px-Loaded_Potato_Cake_with_Mushrooms_%26_baked_beans_-_No.16_2024-03-04.jpg",
   'lobster-bisque': "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Lobster_bisque.jpg/960px-Lobster_bisque.jpg",

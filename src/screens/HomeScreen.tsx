@@ -6,11 +6,10 @@ import { DIETARY_OPTIONS } from '../data/questions'
 import { FoodArt } from '../components/FoodArt'
 import { Screen } from '../components/ui'
 import {
-  IconDice, IconFlame, IconForward, IconMoon, IconSun, IconUser, IconUtensils,
+  IconDice, IconFlame, IconForward, IconUser, IconUtensils,
 } from '../components/icons'
 import { currentDaypart, DAYPART_GREETING, DAYPART_NOTE } from '../engine/daypart'
 import type { History } from '../storage/history'
-import type { Theme } from '../storage/theme'
 
 /**
  * The opening screen.
@@ -24,11 +23,9 @@ import type { Theme } from '../storage/theme'
  * there. The brand is a small mark in the corner where it belongs.
  */
 export function HomeScreen({
-  history, theme, onStart, onSurprise, onProfile, onToggleTheme,
+  history, onStart, onSurprise, onProfile,
 }: {
   history: History
-  theme: Theme
-  onToggleTheme: () => void
   onStart: () => void
   onSurprise: () => void
   onProfile: () => void
@@ -64,18 +61,9 @@ export function HomeScreen({
   return (
     <Screen
       right={
-        <>
-          <button
-            className="iconbtn"
-            onClick={onToggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? <IconSun /> : <IconMoon />}
-          </button>
-          <button className="iconbtn" onClick={onProfile} aria-label="Your food profile">
-            <IconUser />
-          </button>
-        </>
+        <button className="iconbtn" onClick={onProfile} aria-label="Your food profile">
+          <IconUser />
+        </button>
       }
       footer={
         <>

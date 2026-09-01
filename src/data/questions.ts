@@ -3,7 +3,7 @@ import type { HungerLevel, PreferenceAnswers, VetoId } from '../types'
 /**
  * The questionnaire, as data.
  *
- * Two rules keep this from getting annoying:
+ * Three rules keep this from getting annoying:
  *
  * 1. Never ask what cuisine you want. If you knew that, you wouldn't be here.
  * 2. Never ask the same thing twice. The old build asked "not feeling spicy?"
@@ -11,6 +11,14 @@ import type { HungerLevel, PreferenceAnswers, VetoId } from '../types'
  *    duplicate pair for hot/cold, heavy, healthy and sweet. Now the mood
  *    questions live here and *only* here, and standing dietary rules live in
  *    your profile where you set them once.
+ * 3. Ask what's *off* the table, not what's on it. "I want something crispy"
+ *    is a decision you mostly haven't made yet - that's why you're here. "I'm
+ *    not doing anything fried right now" is one you already have. Ruling out
+ *    is faster and more honest than picking, so every option below is phrased
+ *    as a no wherever a no makes sense.
+ *
+ * How many of these you get asked is decided at runtime - see
+ * engine/questionPlan.ts. The order here is only the tie-breaker.
  */
 
 export type QuestionKey = 'hunger' | keyof PreferenceAnswers
@@ -29,72 +37,87 @@ export interface Question {
   options: AnswerOption[]
 }
 
-export const QUESTIONS: Question[] = [
-  {
-    key: 'hunger',
-    prompt: 'How hungry are you?',
-    options: [
-      { value: 'snack', label: 'Just a snack', emoji: '🍿', hint: 'something small' },
-      { value: 'normal', label: 'Normal meal', emoji: '🍽️', hint: 'regular hungry' },
-      { value: 'starving', label: 'Starving', emoji: '🍜', hint: 'I need real food' },
-    ],
-  },
+/**
+ * Hunger is always asked first: it sets portion *and* heaviness, so every
+ * later question is scored against a pool that already fits your appetite.
+ */
+export const HUNGER_QUESTION: Question = {
+  key: 'hunger',
+  prompt: 'How hungry, honestly?',
+  options: [
+    { value: 'snack', label: 'Barely', emoji: '🍿', hint: 'just picking at something' },
+    { value: 'normal', label: 'Normal hungry', emoji: '🍽️', hint: 'a proper meal' },
+    { value: 'starving', label: 'Starving', emoji: '🍜', hint: 'feed me immediately' },
+  ],
+}
+
+/** Everything after hunger. The planner picks which of these you actually see. */
+export const PREFERENCE_QUESTIONS: Question[] = [
   {
     key: 'temperature',
-    prompt: 'Hot or cold?',
+    prompt: "What's not happening?",
     options: [
-      { value: 'hot', label: 'Something hot', emoji: '🔥' },
-      { value: 'cold', label: 'Something cold', emoji: '🧊' },
-      { value: 'any', label: 'Either works', emoji: '🤷' },
+      { value: 'cold', label: 'Nothing hot', emoji: '🧊', hint: 'cool or room temp' },
+      { value: 'hot', label: 'Nothing cold', emoji: '🔥', hint: 'wants to be warm' },
+      { value: 'any', label: 'Either, whatever', emoji: '🤷' },
     ],
   },
   {
     key: 'texture',
-    prompt: 'What sounds better?',
+    prompt: 'Rule one out.',
     options: [
-      { value: 'crispy', label: 'Crispy', emoji: '🍟', hint: 'crunch, fried edges' },
-      { value: 'soft', label: 'Soft and saucy', emoji: '🍲', hint: 'warm, comforting' },
-      { value: 'any', label: 'Either works', emoji: '🤷' },
+      { value: 'soft', label: 'Nothing fried', emoji: '🍲', hint: 'soft and saucy instead' },
+      { value: 'crispy', label: 'Nothing soggy', emoji: '🍟', hint: 'crunch, fried edges' },
+      { value: 'any', label: 'No strong feelings', emoji: '🤷' },
     ],
   },
   {
     key: 'spice',
-    prompt: 'How much heat?',
+    prompt: 'Where are you on heat?',
     options: [
-      { value: 'none', label: 'None', emoji: '🚫' },
-      { value: 'mild', label: 'A little kick', emoji: '🌶️' },
-      { value: 'spicy', label: 'Bring it', emoji: '🔥' },
-      { value: 'any', label: "Don't care", emoji: '🤷' },
+      { value: 'none', label: 'Not doing spicy', emoji: '🚫' },
+      { value: 'mild', label: 'A little is fine', emoji: '🌶️' },
+      { value: 'spicy', label: 'Cannot be too hot', emoji: '🔥' },
+      { value: 'any', label: 'Genuinely do not mind', emoji: '🤷' },
     ],
   },
   {
     key: 'indulgence',
-    prompt: 'Being good, or not?',
+    prompt: "Which one's off the table?",
     options: [
-      { value: 'healthy', label: 'Something healthy', emoji: '🥗' },
-      { value: 'indulgent', label: 'Zero regrets', emoji: '🧈' },
-      { value: 'any', label: 'Somewhere between', emoji: '🤷' },
+      { value: 'healthy', label: 'Nothing heavy', emoji: '🥗', hint: 'keep it light' },
+      { value: 'indulgent', label: 'Not doing salad', emoji: '🧈', hint: 'zero regrets' },
+      { value: 'any', label: 'Somewhere in between', emoji: '🤷' },
     ],
   },
   {
     key: 'sweetness',
-    prompt: 'Sweet or savoury?',
+    prompt: 'Any hard no here?',
     options: [
-      { value: 'sweet', label: 'Sweet', emoji: '🍩' },
-      { value: 'savory', label: 'Savoury', emoji: '🧂' },
-      { value: 'any', label: 'Either works', emoji: '🤷' },
+      { value: 'savory', label: 'Nothing sweet', emoji: '🧂' },
+      { value: 'sweet', label: 'Not doing savoury', emoji: '🍩' },
+      { value: 'any', label: 'Either, whatever', emoji: '🤷' },
     ],
   },
   {
     key: 'budget',
-    prompt: 'What are we spending?',
+    prompt: 'Is money a thing right now?',
     options: [
-      { value: 'cheap', label: 'Keep it cheap', emoji: '💸', hint: 'under about $12' },
-      { value: 'treat', label: 'Treat myself', emoji: '✨', hint: 'worth the money' },
-      { value: 'any', label: 'Money is no object', emoji: '🤷' },
+      { value: 'cheap', label: 'Not spending much', emoji: '💸', hint: 'under about $12' },
+      { value: 'treat', label: 'Happy to spend', emoji: '✨', hint: 'worth the money' },
+      { value: 'any', label: 'Not a factor', emoji: '🤷' },
     ],
   },
 ]
+
+/** Every question, hunger first. Used for lookups and tests. */
+export const QUESTIONS: Question[] = [HUNGER_QUESTION, ...PREFERENCE_QUESTIONS]
+
+export function questionFor(key: QuestionKey): Question {
+  const found = QUESTIONS.find((q) => q.key === key)
+  if (!found) throw new Error(`no question for ${key}`)
+  return found
+}
 
 /** Everything unanswered reads as "don't care", so skipping is always safe. */
 export const DEFAULT_PREFERENCES: PreferenceAnswers = {
