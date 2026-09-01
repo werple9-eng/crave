@@ -37,12 +37,12 @@ tags, plus a drawn 1200×630 share image, so pasting the link into iMessage,
 WhatsApp, Discord or Slack renders a proper card instead of a bare URL.
 
 **`og:image` and `og:url` must be absolute URLs.** Most link scrapers won't
-resolve a relative one and you'll get a blank grey card. Those two are the only
+resolve a relative one and you'll get a blank gray card. Those two are the only
 host-specific values in the app — update them if it ever moves.
 
 Icons live in `public/`: an SVG favicon for browser tabs, PNG fallbacks, an
 `apple-touch-icon.png` for iOS, and a web manifest so Add to Home Screen picks
-up the right name, icon and theme colour rather than a screenshot.
+up the right name, icon and theme color rather than a screenshot.
 
 Regenerating them: they were drawn on a `<canvas>` and POSTed straight to disk
 by a throwaway local server, which avoids needing an image toolchain. There's
@@ -125,13 +125,7 @@ The step label never says "3 of 8", because that would become a lie the
 moment the count changes. It counts dishes down instead - "147 still in play",
 then "down to 36" - which is the thing actually happening.
 
-**It asks what's off the table, not what's on it.** "I want something crispy"
-is a decision you mostly haven't made yet - that is why you opened the app.
-"I'm not doing anything fried right now" is one you already have. So the
-options are phrased as noes wherever a no makes sense, and the explanations on
-the results screen read back the same way.
-
-**It still never asks the same thing twice**, and never asks what cuisine you
+**It never asks the same thing twice**, and never asks what cuisine you
 want. An earlier build asked "not feeling spicy?" on one screen and "do you
 want heat?" on the next, plus the same duplicate pair for hot/cold, heaviness,
 healthiness and sweetness. Mood questions live in one place; standing dietary
@@ -139,9 +133,9 @@ rules live in your profile where you set them once.
 
 ### The look
 
-**Maximalist, delivery-app red.** A saturated multi-colour ground under a dot
+**Maximalist, delivery-app red.** A saturated multi-color ground under a dot
 screen, chunky ink outlines on everything, hard offset shadows, and a different
-colour for every option in a list. Buttons travel *into* their own shadow when
+color for every option in a list. Buttons travel *into* their own shadow when
 pressed. The palette is anchored on a hot red (#eb1700) over clean white cards,
 taking its cue from food-delivery apps — inspired by that look, not copying it:
 no borrowed logo, wordmark or brand asset appears anywhere.
@@ -155,17 +149,17 @@ The theme needs three tokens, not one, because they do not move together:
 | `--shadow-ink` | the hard offset shadow | stays dark — it has to be darker than the card or the shadow vanishes |
 | `--on-accent` | text sitting on a pastel fill | **unchanged** — a cream label on a pastel chip is unreadable |
 
-That last one is the trap: most colour on this page sits on a pastel, so if
+That last one is the trap: most color on this page sits on a pastel, so if
 text just inherits `--ink` it becomes invisible the moment the theme flips.
 
 **Still built around appetite.** Warm hues — watermelon, papaya, mango, custard —
 carry roughly two thirds of the surface area and always own the primary
 actions. Lime, mint, berry and grape are pops, not the base. Cool blues and
-greys stay out of it: they read clinical and are famously appetite-suppressing.
+grays stay out of it: they read clinical and are famously appetite-suppressing.
 Outlines are a very dark warm brown (`--ink`), never black.
 
 **Emoji on the option pickers**, drawn icons everywhere else. Emoji are big,
-instantly readable and carry their own colour, which is exactly what a
+instantly readable and carry their own color, which is exactly what a
 maximalist picker wants; the chrome (back, undo, heart, trash) stays on the
 drawn 24px icon set so it holds up small and inherits `currentColor`.
 
@@ -230,13 +224,13 @@ One more trap: stroke the vessel outline with a path that **excludes the flat
 top edge**. Stroking the full body path after the contents draws that top edge
 straight across the food as a stray line.
 
-Food colours are contrast-checked: any `art.base` above 0.86 luminance vanishes
+Food colors are contrast-checked: any `art.base` above 0.86 luminance vanishes
 against the pale card, so those get pushed down toward a warm tan.
 
 **Icons** are one family on a 24px grid with a 1.85 stroke, all inheriting
-`currentColor` — never hardcode a colour in `icons.tsx`. They are drawn from
+`currentColor` — never hardcode a color in `icons.tsx`. They are drawn from
 what the real object looks like: a flame is a teardrop with a cooler inner
-core, a fork has tines and a collar, a leaf has an off-centre midrib.
+core, a fork has tines and a collar, a leaf has an off-center midrib.
 
 ### Motion
 
@@ -274,7 +268,7 @@ influence:
    a question about texture in the abstract. Liking one food also lifts foods
    similar to it, so fourteen swipes teach the engine about all 314.
 2. **The questions** — hot/cold, crispy/soft, spice, healthy vs indulgent,
-   sweet vs savoury, and budget (which uses the priceLevel on every dish).
+   sweet vs savory, and budget (which uses the priceLevel on every dish).
 3. **Hunger** — drives both how filling and how heavy the dish is.
 4. **Dietary rules** — meat, seafood, dairy and raw remove foods entirely;
    fried and bread are heavy penalties a great match can climb back out of.
@@ -315,11 +309,11 @@ When a recommendation feels wrong, the fix is almost always in one of two files:
 - **`src/engine/weights.ts`** — how much each rule matters. Relative sizes
   matter more than absolute ones.
 
-Adding a dish is one object in `foods.ts` — pick any `art.form` and two colours
+Adding a dish is one object in `foods.ts` — pick any `art.form` and two colors
 and it draws itself. Adding or rewording a question is one entry in
 `questions.ts`.
 
-Run `npm test` after either — the tests assert things like "starving plus savoury
+Run `npm test` after either — the tests assert things like "starving plus savory
 returns filling meals", "no spice keeps spicy food away", and "anything tagged
 cheesy is also tagged dairy", so they catch a mislabeled dish surprisingly often.
 

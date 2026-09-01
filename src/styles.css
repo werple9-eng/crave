@@ -1,8 +1,8 @@
 /* ------------------------------------------------------------------ *
  * Crave — maximalist, delivery-app red
  *
- * Loud on purpose: a saturated multi-colour ground, chunky ink outlines,
- * hard offset shadows, and a different colour for every option.
+ * Loud on purpose: a saturated multi-color ground, chunky ink outlines,
+ * hard offset shadows, and a different color for every option.
  *
  * The palette takes its cue from food-delivery apps — a hot red
  * (#eb1700) as the hero on clean white cards. Inspired by that look, not
@@ -10,7 +10,7 @@
  *
  * Still built around appetite. Red, tangerine, mango and butter carry the
  * surface area and always own the primary actions; lime, mint, berry and
- * grape are pops, not the base. Cool blues and greys stay out of it — they
+ * grape are pops, not the base. Cool blues and grays stay out of it — they
  * read clinical and suppress appetite.
  *
  * Two rules survive from the quieter version, both learned the hard way:
@@ -20,7 +20,7 @@
 
 :root {
   /* Sorbet: pastel, but with enough saturation left in it to read as
-   * colour rather than as washed-out grey. Every one of these carries dark
+   * color rather than as washed-out gray. Every one of these carries dark
    * text and a dark outline, which is what keeps a pastel set from going
    * weak. Warm hues still own the primary actions. */
   --c-tomato: #f2685c;
@@ -100,7 +100,7 @@ body {
 button { font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 
 /**
- * The colourful ground.
+ * The colorful ground.
  *
  * Seven baked radial gradients plus a dot screen. All static — an animated
  * blur here once dropped the whole app to about one frame per second.
@@ -264,7 +264,7 @@ a.btn { text-decoration: none; }
 .options { display: grid; gap: 13px; }
 
 /**
- * Every option gets its own colour, cycled by position. Warm hues sit in the
+ * Every option gets its own color, cycled by position. Warm hues sit in the
  * first slots because those are the most-picked answers.
  */
 .option {
@@ -773,7 +773,7 @@ a.btn { text-decoration: none; }
   letter-spacing: -0.055em;
   margin: 14px 0 10px;
   /* Pastel fill on a pastel ground disappears, so the wordmark inverts:
-   * ink letters with the colour thrown behind them as hard offsets. Reads
+   * ink letters with the color thrown behind them as hard offsets. Reads
    * instantly at any size and still says 'pastel palette'. */
   color: var(--ink);
   text-shadow: 3px 3px 0 var(--c-butter);

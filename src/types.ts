@@ -44,9 +44,9 @@ export type ArtForm =
 
 export interface FoodArt {
   form: ArtForm
-  /** Main colour of the food itself. */
+  /** Main color of the food itself. */
   base: string
-  /** Secondary colour: sauce, filling, crust, topping. */
+  /** Secondary color: sauce, filling, crust, topping. */
   accent: string
 }
 

@@ -10,7 +10,7 @@ import type { PrefKey } from './questionPlan'
 
 /**
  * Plays a whole session, answering with the given strategy, and reports how
- * many questions it took. This is the behaviour that matters - the point of
+ * many questions it took. This is the behavior that matters - the point of
  * the planner is the *length* of the interview, not any single decision.
  */
 function runSession(

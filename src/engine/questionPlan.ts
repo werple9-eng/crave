@@ -107,7 +107,7 @@ export function gainFor(pool: Food[], key: PrefKey): number {
   const avgKept = counts.reduce((a, b) => a + b, 0) / counts.length / pool.length
   const cut = Math.max(0, 1 - avgKept)
 
-  // How evenly it splits, as normalised entropy.
+  // How evenly it splits, as normalized entropy.
   let entropy = 0
   for (const c of counts) {
     if (c === 0) continue

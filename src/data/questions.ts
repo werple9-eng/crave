@@ -3,19 +3,14 @@ import type { HungerLevel, PreferenceAnswers, VetoId } from '../types'
 /**
  * The questionnaire, as data.
  *
- * Three rules keep this from getting annoying:
+ * Two rules keep this from getting annoying:
  *
  * 1. Never ask what cuisine you want. If you knew that, you wouldn't be here.
  * 2. Never ask the same thing twice. The old build asked "not feeling spicy?"
  *    on one screen and "do you want heat?" on the next, plus the same
- *    duplicate pair for hot/cold, heavy, healthy and sweet. Now the mood
- *    questions live here and *only* here, and standing dietary rules live in
- *    your profile where you set them once.
- * 3. Ask what's *off* the table, not what's on it. "I want something crispy"
- *    is a decision you mostly haven't made yet - that's why you're here. "I'm
- *    not doing anything fried right now" is one you already have. Ruling out
- *    is faster and more honest than picking, so every option below is phrased
- *    as a no wherever a no makes sense.
+ *    duplicate pair for hot/cold, heaviness, healthiness and sweetness. Now
+ *    the mood questions live here and *only* here, and standing dietary rules
+ *    live in your profile where you set them once.
  *
  * How many of these you get asked is decided at runtime - see
  * engine/questionPlan.ts. The order here is only the tie-breaker.
@@ -55,56 +50,56 @@ export const HUNGER_QUESTION: Question = {
 export const PREFERENCE_QUESTIONS: Question[] = [
   {
     key: 'temperature',
-    prompt: "What's not happening?",
+    prompt: 'Hot or cold?',
     options: [
-      { value: 'cold', label: 'Nothing hot', emoji: '🧊', hint: 'cool or room temp' },
-      { value: 'hot', label: 'Nothing cold', emoji: '🔥', hint: 'wants to be warm' },
+      { value: 'hot', label: 'Something hot', emoji: '🔥' },
+      { value: 'cold', label: 'Something cold', emoji: '🧊' },
       { value: 'any', label: 'Either, whatever', emoji: '🤷' },
     ],
   },
   {
     key: 'texture',
-    prompt: 'Rule one out.',
+    prompt: 'What sounds better?',
     options: [
-      { value: 'soft', label: 'Nothing fried', emoji: '🍲', hint: 'soft and saucy instead' },
-      { value: 'crispy', label: 'Nothing soggy', emoji: '🍟', hint: 'crunch, fried edges' },
+      { value: 'crispy', label: 'Crispy', emoji: '🍟', hint: 'crunch, fried edges' },
+      { value: 'soft', label: 'Soft and saucy', emoji: '🍲', hint: 'warm, comforting' },
       { value: 'any', label: 'No strong feelings', emoji: '🤷' },
     ],
   },
   {
     key: 'spice',
-    prompt: 'Where are you on heat?',
+    prompt: 'How much heat?',
     options: [
-      { value: 'none', label: 'Not doing spicy', emoji: '🚫' },
-      { value: 'mild', label: 'A little is fine', emoji: '🌶️' },
-      { value: 'spicy', label: 'Cannot be too hot', emoji: '🔥' },
-      { value: 'any', label: 'Genuinely do not mind', emoji: '🤷' },
+      { value: 'none', label: 'None', emoji: '🚫' },
+      { value: 'mild', label: 'A little kick', emoji: '🌶️' },
+      { value: 'spicy', label: 'Bring it', emoji: '🔥' },
+      { value: 'any', label: "Don't care", emoji: '🤷' },
     ],
   },
   {
     key: 'indulgence',
-    prompt: "Which one's off the table?",
+    prompt: 'Being good, or not?',
     options: [
-      { value: 'healthy', label: 'Nothing heavy', emoji: '🥗', hint: 'keep it light' },
-      { value: 'indulgent', label: 'Not doing salad', emoji: '🧈', hint: 'zero regrets' },
+      { value: 'healthy', label: 'Something healthy', emoji: '🥗', hint: 'keep it light' },
+      { value: 'indulgent', label: 'Zero regrets', emoji: '🧈', hint: 'go for it' },
       { value: 'any', label: 'Somewhere in between', emoji: '🤷' },
     ],
   },
   {
     key: 'sweetness',
-    prompt: 'Any hard no here?',
+    prompt: 'Sweet or savory?',
     options: [
-      { value: 'savory', label: 'Nothing sweet', emoji: '🧂' },
-      { value: 'sweet', label: 'Not doing savoury', emoji: '🍩' },
+      { value: 'sweet', label: 'Sweet', emoji: '🍩' },
+      { value: 'savory', label: 'Savory', emoji: '🧂' },
       { value: 'any', label: 'Either, whatever', emoji: '🤷' },
     ],
   },
   {
     key: 'budget',
-    prompt: 'Is money a thing right now?',
+    prompt: 'What are we spending?',
     options: [
-      { value: 'cheap', label: 'Not spending much', emoji: '💸', hint: 'under about $12' },
-      { value: 'treat', label: 'Happy to spend', emoji: '✨', hint: 'worth the money' },
+      { value: 'cheap', label: 'Keep it cheap', emoji: '💸', hint: 'under about $12' },
+      { value: 'treat', label: 'Treat myself', emoji: '✨', hint: 'worth the money' },
       { value: 'any', label: 'Not a factor', emoji: '🤷' },
     ],
   },

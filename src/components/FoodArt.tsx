@@ -9,10 +9,10 @@ import {
 /**
  * Hand-drawn food illustrations.
  *
- * Every dish maps to one of twenty-three silhouettes, recoloured from its own
- * two colours and shaded with real gradients, so hundreds of dishes read as
+ * Every dish maps to one of twenty-three silhouettes, recolored from its own
+ * two colors and shaded with real gradients, so hundreds of dishes read as
  * one deliberate set instead of a bag of clip art. Unlike stock photography
- * they load instantly, never 404, carry no licence, and match the palette.
+ * they load instantly, never 404, carry no license, and match the palette.
  *
  * Drawn on a 128x128 grid.
  *
@@ -35,7 +35,7 @@ import {
  * render that instead, and drop back to the drawing if the image fails.
  */
 
-/* ------------------------- colour helpers ------------------------- */
+/* ------------------------- color helpers ------------------------- */
 
 function hexToRgb(hex: string): [number, number, number] {
   const h = hex.replace('#', '')
@@ -56,7 +56,7 @@ function mix(hex: string, target: [number, number, number], amount: number): str
 }
 
 const lighten = (hex: string, amount: number) => mix(hex, [255, 248, 236], amount)
-/** Darkens toward a warm brown rather than grey - food shadows are never cold. */
+/** Darkens toward a warm brown rather than gray - food shadows are never cold. */
 const darken = (hex: string, amount: number) => mix(hex, [58, 26, 12], amount)
 
 interface Colors {
@@ -629,7 +629,7 @@ export const ART_FORM_KEYS = Object.keys(FORMS) as ArtForm[]
  * Details layered over the silhouette, chosen from the dish's own attributes.
  *
  * This is what stops the dozen dishes sharing the `plate` form from looking
- * like a dozen recolours of one picture. Capped at two so cards stay calm.
+ * like a dozen recolors of one picture. Capped at two so cards stay calm.
  */
 function garnishesFor(food: Food): ReactElement[] {
   const out: ReactElement[] = []

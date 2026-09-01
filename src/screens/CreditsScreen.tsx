@@ -31,7 +31,7 @@ export function CreditsScreen({ onBack }: { onBack: () => void }) {
       <p className="subtitle">
         {total} dishes have a photograph. Most are CC0 studio shots from StockSnap
         and Rawpixel, which need no attribution; the rest come from Wikimedia
-        Commons, and those listed below are under licences that require naming the
+        Commons, and those listed below are under licenses that require naming the
         photographer. Everything else in the app is drawn.
       </p>
 
@@ -50,7 +50,7 @@ export function CreditsScreen({ onBack }: { onBack: () => void }) {
               rel="noreferrer noopener"
             >
               <span className="credit-title">{c.title}</span>
-              <span className="credit-meta">{c.author} · {c.licence}</span>
+              <span className="credit-meta">{c.author} · {c.license}</span>
             </a>
           ))}
         </div>

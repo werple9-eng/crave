@@ -10,7 +10,7 @@ import type { Food } from '../types'
  *   fillingLevel does it actually end hunger, regardless of how heavy it feels
  *   healthiness  1 = joyfully not, 5 = genuinely good for you
  *   spiceLevel   as normally served, not the hot-sauce-maxed version
- *   art          which silhouette to draw, and its two colours
+ *   art          which silhouette to draw, and its two colors
  */
 export const FOODS: Food[] = [
   /* ============================ american ============================ */
@@ -197,7 +197,7 @@ export const FOODS: Food[] = [
     temperature: 'hot', texture: 'saucy', heaviness: 3, spiceLevel: 1, healthiness: 3, sweetness: 0, fillingLevel: 4, priceLevel: 3,
     art: { form: 'noodles', base: '#f0d9a0', accent: '#e8734e' }, tags: ['seafood', 'dairy', 'carb-heavy', 'rich', 'protein-heavy'] },
   { id: 'arancini', name: 'Arancini', cuisine: 'italian', category: 'fried',
-    description: 'Crunchy risotto spheres with a molten cheese centre.',
+    description: 'Crunchy risotto spheres with a molten cheese center.',
     temperature: 'hot', texture: 'crispy', heaviness: 3, spiceLevel: 0, healthiness: 2, sweetness: 0, fillingLevel: 3, priceLevel: 2,
     art: { form: 'plate', base: '#dda55a', accent: '#c04a2e' }, tags: ['fried', 'cheesy', 'dairy', 'shareable', 'vegetarian'] },
   { id: 'minestrone', name: 'Minestrone', cuisine: 'italian', category: 'soup',
@@ -263,7 +263,7 @@ export const FOODS: Food[] = [
     temperature: 'hot', texture: 'chewy', heaviness: 2, spiceLevel: 2, healthiness: 3, sweetness: 2, fillingLevel: 2, priceLevel: 1,
     art: { form: 'skewer', base: '#f2cf4e', accent: '#d8542e' }, tags: ['vegetarian', 'grilled', 'street-food', 'cheesy', 'dairy'] },
   { id: 'empanadas', name: 'Empanadas', cuisine: 'latin', category: 'snack',
-    description: 'Flaky half-moons, savoury filling, chimichurri for dipping.',
+    description: 'Flaky half-moons, savory filling, chimichurri for dipping.',
     temperature: 'hot', texture: 'crispy', heaviness: 3, spiceLevel: 1, healthiness: 2, sweetness: 0, fillingLevel: 3, priceLevel: 1,
     art: { form: 'dumpling', base: '#e5bd76', accent: '#5f9e4a' }, tags: ['meat', 'street-food', 'shareable', 'handheld'] },
   { id: 'ceviche', name: 'Ceviche', cuisine: 'latin', category: 'seafood',
@@ -297,7 +297,7 @@ export const FOODS: Food[] = [
     temperature: 'hot', texture: 'soft', heaviness: 4, spiceLevel: 4, healthiness: 2, sweetness: 0, fillingLevel: 4, priceLevel: 2,
     art: { form: 'bowl', base: '#c85a2e', accent: '#f0c14c' }, tags: ['meat', 'soupy', 'brothy', 'carb-heavy', 'comfort'] },
   { id: 'katsu-curry', name: 'Katsu Curry', cuisine: 'japanese', category: 'curry',
-    description: 'Panko cutlet, thick sweet-savoury curry, mound of rice.',
+    description: 'Panko cutlet, thick sweet-savory curry, mound of rice.',
     temperature: 'hot', texture: 'crispy', heaviness: 5, spiceLevel: 1, healthiness: 2, sweetness: 2, fillingLevel: 5, priceLevel: 2,
     art: { form: 'plate', base: '#a8622a', accent: '#e5b054' }, tags: ['meat', 'fried', 'carb-heavy', 'comfort', 'rich'] },
   { id: 'udon', name: 'Udon', cuisine: 'japanese', category: 'noodle',
@@ -535,7 +535,7 @@ export const FOODS: Food[] = [
     temperature: 'hot', texture: 'soft', heaviness: 3, spiceLevel: 0, healthiness: 2, sweetness: 0, fillingLevel: 3, priceLevel: 1,
     art: { form: 'burger', base: '#e8be74', accent: '#f2c93c' }, tags: ['meat', 'cheesy', 'dairy', 'handheld', 'bread-heavy', 'comfort'] },
   { id: 'omelette', name: 'Cheese Omelette', cuisine: 'breakfast', category: 'breakfast',
-    description: 'Softly folded, barely coloured, chives and toast.',
+    description: 'Softly folded, barely colored, chives and toast.',
     temperature: 'hot', texture: 'soft', heaviness: 2, spiceLevel: 0, healthiness: 4, sweetness: 0, fillingLevel: 3, priceLevel: 1,
     art: { form: 'plate', base: '#f2d24c', accent: '#e8a83c' }, tags: ['vegetarian', 'cheesy', 'dairy', 'protein-heavy', 'comfort'] },
   { id: 'biscuits-gravy', name: 'Biscuits & Gravy', cuisine: 'breakfast', category: 'breakfast',
@@ -683,7 +683,7 @@ export const FOODS: Food[] = [
 
   /* ============================ italian +ise ======================== */
   { id: 'mushroom-risotto', name: 'Mushroom Risotto', cuisine: 'italian', category: 'rice-bowl',
-    description: 'Slow-stirred, glossy, deeply savoury, parmesan folded through.',
+    description: 'Slow-stirred, glossy, deeply savory, parmesan folded through.',
     temperature: 'hot', texture: 'saucy', heaviness: 4, spiceLevel: 0, healthiness: 3, sweetness: 0, fillingLevel: 4, priceLevel: 3,
     art: { form: 'bowl', base: '#e0d0a8', accent: '#8a5f3c' }, tags: ['vegetarian', 'cheesy', 'dairy', 'comfort', 'rich', 'carb-heavy'] },
   { id: 'pesto-pasta', name: 'Pesto Pasta', cuisine: 'italian', category: 'pasta',
@@ -911,7 +911,7 @@ export const FOODS: Food[] = [
     temperature: 'either', texture: 'crispy', heaviness: 4, spiceLevel: 0, healthiness: 2, sweetness: 2, fillingLevel: 4, priceLevel: 3,
     art: { form: 'sandwich', base: '#e4c9a3', accent: '#8a4a28' }, tags: ['meat', 'fried', 'bread-heavy', 'handheld', 'rich'] },
   { id: 'taiyaki', name: 'Taiyaki', cuisine: 'japanese', category: 'sweet',
-    description: 'Fish-shaped cake, crisp edges, sweet red bean centre.',
+    description: 'Fish-shaped cake, crisp edges, sweet red bean center.',
     temperature: 'hot', texture: 'crispy', heaviness: 2, spiceLevel: 0, healthiness: 2, sweetness: 5, fillingLevel: 2, priceLevel: 1,
     art: { form: 'pastry', base: '#e0b263', accent: '#6a3f4a' }, tags: ['vegetarian', 'street-food', 'comfort'] },
 

@@ -14,7 +14,7 @@ import type { History } from '../storage/history'
 /**
  * The opening screen.
  *
- * It used to be a centred logo with the app's name under it — a splash
+ * It used to be a centered logo with the app's name under it — a splash
  * screen, basically, which told you nothing and made you read a brand before
  * you could do the one thing you came for.
  *

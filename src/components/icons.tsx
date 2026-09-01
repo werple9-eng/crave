@@ -5,7 +5,7 @@ import type { ReactElement, SVGProps } from 'react'
  *
  * All drawn on the same 24px grid with a 1.85 stroke, round caps and round
  * joins, so they sit together as one family. Everything inherits
- * `currentColor` - never hardcode a colour in here.
+ * `currentColor` - never hardcode a color in here.
  *
  * Shapes are drawn from what the real object actually looks like, which
  * matters more than it sounds. The first pass had a flame with a notch in it,
@@ -17,7 +17,7 @@ import type { ReactElement, SVGProps } from 'react'
  *   fork   short tines (about a quarter of total length) meeting a rounded
  *          shoulder, then a long tapering handle.
  *   knife  straight spine, the edge curving up to meet it at the point.
- *   leaf   an asymmetric lens with a midrib running off-centre to the tip.
+ *   leaf   an asymmetric lens with a midrib running off-center to the tip.
  *
  * Check any change at `#gallery` in dev - it renders every icon at display
  * size and again at 16px, where weak shapes fall apart first.
@@ -136,7 +136,7 @@ export const IconFlame = (p: IconProps) => (
   </Icon>
 )
 
-/** An asymmetric leaf with an off-centre midrib. */
+/** An asymmetric leaf with an off-center midrib. */
 export const IconLeaf = (p: IconProps) => (
   <Icon {...p}>
     <path d="M4.4 19.7c-1-8.2 4.9-15 15.2-15.4.7 10-5.7 16-15.2 15.4z" />

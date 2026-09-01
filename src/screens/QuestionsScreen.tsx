@@ -119,7 +119,7 @@ export function QuestionsScreen({
           ? 'A few quick ones. Go with your gut.'
           : count + 1 > MIN_QUESTIONS
             ? 'Nearly there. Whatever comes to mind.'
-            : "Easier to say what you don't want."}
+            : "No wrong answers. Pick whatever's closest."}
       </p>
       <div className="options">
         {question.options.map((option, i) => (

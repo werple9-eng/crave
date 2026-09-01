@@ -356,7 +356,7 @@ export function toppingsFor(food: Food): ToppingKey[] {
  * Positions inside a vessel opening.
  *
  * Spread around the well rather than stacked in the middle, because that is
- * how a bowl is actually plated - and a centred pile is exactly what made the
+ * how a bowl is actually plated - and a centered pile is exactly what made the
  * old art read as one anonymous mound.
  */
 const SLOTS: [number, number][] = [[45, 51], [83, 47], [87, 65], [50, 67]]
